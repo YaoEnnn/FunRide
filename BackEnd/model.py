@@ -17,6 +17,8 @@ class CarType(db.Model):
     name = db.Column(db.String(50), nullable = False)
     seat = db.Column(db.Integer, nullable = False)
 
+    trip_ref = db.relationship('Trip', backref = 'car_type', lazy=True, cascade = 'all, delete')
+
     def __init__(self, name, seat):
         self.name = name
         self.seat = seat
@@ -25,7 +27,7 @@ class Trip(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     start = db.Column(db.String(100), nullable = False)
     end = db.Column(db.String(100), nullable = False)
-    departure_time = db.Column(db.String(50), nullable = False)
+    departure_time = db.Column(db.Time, nullable = False)
     arrived_time = db.Column(db.String(50), nullable = False)
     price = db.Column(db.Integer, nullable = False)
     departure_day = db.Column(db.String(50), nullable = False)

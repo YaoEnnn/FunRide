@@ -4,6 +4,7 @@ from os import path
 from setting import basedir
 from sqlalchemy import text
 import schedule
+import routes
 
 if __name__ == "__main__":
     if not path.exists(f"{basedir}/storage.db"):
@@ -19,4 +20,4 @@ if __name__ == "__main__":
     ################
     schedule.every().day.at("10:30").do(generate_default_trips)
 
-    app.run(debug=True)
+    app.run(debug=True, port=5000)

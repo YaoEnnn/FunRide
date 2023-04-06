@@ -1,4 +1,5 @@
 import os
+from datetime import time
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 os.chdir(basedir)
@@ -33,7 +34,7 @@ DEFAULT_TRIP_LIST = [
     {
         "start":"District 1, HCMC",
         "end":"BaoLoc City",
-        "departure_time":"6:00",
+        "departure_time":time(hour=6, minute=00),
         "arrived_time":"10:00",
         "price":400000,
         "car_type":1
@@ -41,7 +42,7 @@ DEFAULT_TRIP_LIST = [
     {
         "start":"BinhTan District, HCMC",
         "end":"BaoLoc City",
-        "departure_time":"6:30",
+        "departure_time":time(hour=6, minute=30),
         "arrived_time":"10:30",
         "price":400000,
         "car_type":1
@@ -49,7 +50,7 @@ DEFAULT_TRIP_LIST = [
     {
         "start":"BaoLoc City",
         "end":"District 1, HCMC",
-        "departure_time":"10:30",
+        "departure_time":time(hour=10, minute=30),
         "arrived_time":"14:30",
         "price":400000,
         "car_type":1
@@ -57,7 +58,7 @@ DEFAULT_TRIP_LIST = [
     {
         "start":"BaoLoc City",
         "end":"BinhTan District, HCMC",
-        "departure_time":"11:00",
+        "departure_time":time(hour=11, minute=00),
         "arrived_time":"15:00",
         "price":400000,
         "car_type":1
@@ -65,7 +66,7 @@ DEFAULT_TRIP_LIST = [
     {
         "start":"District 1, HCMC",
         "end":"VungTau City",
-        "departure_time":"8:00",
+        "departure_time":time(hour=8, minute=00),
         "arrived_time":"11:00",
         "price":250000,
         "car_type":1
@@ -73,7 +74,7 @@ DEFAULT_TRIP_LIST = [
     {
         "start":"BinhTan District, HCMC",
         "end":"VungTau City",
-        "departure_time":"8:30",
+        "departure_time":time(hour=8, minute=30),
         "arrived_time":"11:30",
         "price":250000,
         "car_type":1
@@ -81,7 +82,7 @@ DEFAULT_TRIP_LIST = [
     {
         "start":"VungTau City",
         "end":"District 1, HCMC",
-        "departure_time":"11:30",
+        "departure_time":time(hour=11, minute=30),
         "arrived_time":"14:30",
         "price":250000,
         "car_type":1
@@ -89,7 +90,7 @@ DEFAULT_TRIP_LIST = [
     {
         "start":"VungTau City",
         "end":"BinhTan District, HCMC",
-        "departure_time":"12:00",
+        "departure_time":time(hour=12, minute=00),
         "arrived_time":"15:00",
         "price":250000,
         "car_type":1
@@ -97,7 +98,7 @@ DEFAULT_TRIP_LIST = [
     {
         "start":"District 1, HCMC",
         "end":"BaoLoc City",
-        "departure_time":"10:00",
+        "departure_time":time(hour=10, minute=00),
         "arrived_time":"14:00",
         "price":300000,
         "car_type":2
@@ -105,7 +106,7 @@ DEFAULT_TRIP_LIST = [
     {
         "start":"BinhTan District, HCMC",
         "end":"BaoLoc City",
-        "departure_time":"10:30",
+        "departure_time":time(hour=10, minute=30),
         "arrived_time":"14:30",
         "price":300000,
         "car_type":2
@@ -113,7 +114,7 @@ DEFAULT_TRIP_LIST = [
     {
         "start":"BaoLoc City",
         "end":"District 1, HCMC",
-        "departure_time":"14:30",
+        "departure_time":time(hour=14, minute=30),
         "arrived_time":"18:30",
         "price":300000,
         "car_type":2
@@ -121,7 +122,7 @@ DEFAULT_TRIP_LIST = [
     {
         "start":"BaoLoc City",
         "end":"BinhTan District, HCMC",
-        "departure_time":"15:00",
+        "departure_time":time(hour=15, minute=00),
         "arrived_time":"19:00",
         "price":300000,
         "car_type":2
@@ -129,7 +130,7 @@ DEFAULT_TRIP_LIST = [
     {
         "start":"District 1, HCMC",
         "end":"VungTau City",
-        "departure_time":"11:00",
+        "departure_time":time(hour=11, minute=00),
         "arrived_time":"14:00",
         "price":200000,
         "car_type":2
@@ -137,7 +138,7 @@ DEFAULT_TRIP_LIST = [
     {
         "start":"BinhTan District, HCMC",
         "end":"VungTau City",
-        "departure_time":"11:30",
+        "departure_time":time(hour=11, minute=30),
         "arrived_time":"14:30",
         "price":200000,
         "car_type":2
@@ -145,7 +146,7 @@ DEFAULT_TRIP_LIST = [
     {
         "start":"VungTau City",
         "end":"District 1, HCMC",
-        "departure_time":"14:30",
+        "departure_time":time(hour=14, minute=30),
         "arrived_time":"17:30",
         "price":200000,
         "car_type":2
@@ -153,7 +154,7 @@ DEFAULT_TRIP_LIST = [
     {
         "start":"VungTau City",
         "end":"BinhTan District, HCMC",
-        "departure_time":"15:00",
+        "departure_time":time(hour=15, minute=00),
         "arrived_time":"18:00",
         "price":200000,
         "car_type":2
@@ -161,7 +162,7 @@ DEFAULT_TRIP_LIST = [
     {
         "start":"District 1, HCMC",
         "end":"BaoLoc City",
-        "departure_time":"12:00",
+        "departure_time":time(hour=12, minute=00),
         "arrived_time":"16:00",
         "price":350000,
         "car_type":3
@@ -169,7 +170,7 @@ DEFAULT_TRIP_LIST = [
     {
         "start":"BinhTan District, HCMC",
         "end":"BaoLoc City",
-        "departure_time":"12:30",
+        "departure_time":time(hour=12, minute=30),
         "arrived_time":"16:30",
         "price":350000,
         "car_type":3
@@ -177,7 +178,7 @@ DEFAULT_TRIP_LIST = [
     {
         "start":"BaoLoc City",
         "end":"District 1, HCMC",
-        "departure_time":"16:30",
+        "departure_time":time(hour=16, minute=30),
         "arrived_time":"20:30",
         "price":350000,
         "car_type":3
@@ -185,7 +186,7 @@ DEFAULT_TRIP_LIST = [
     {
         "start":"BaoLoc City",
         "end":"BinhTan District, HCMC",
-        "departure_time":"17:00",
+        "departure_time":time(hour=17, minute=00),
         "arrived_time":"21:00",
         "price":350000,
         "car_type":3
@@ -193,7 +194,7 @@ DEFAULT_TRIP_LIST = [
     {
         "start":"District 1, HCMC",
         "end":"VungTau City",
-        "departure_time":"16:30",
+        "departure_time":time(hour=16, minute=30),
         "arrived_time":"19:30",
         "price":280000,
         "car_type":3
@@ -201,7 +202,7 @@ DEFAULT_TRIP_LIST = [
     {
         "start":"BinhTan District, HCMC",
         "end":"VungTau City",
-        "departure_time":"17:00",
+        "departure_time":time(hour=17, minute=00),
         "arrived_time":"20:00",
         "price":280000,
         "car_type":3
@@ -209,7 +210,7 @@ DEFAULT_TRIP_LIST = [
     {
         "start":"VungTau City",
         "end":"District 1, HCMC",
-        "departure_time":"20:00",
+        "departure_time":time(hour=20, minute=00),
         "arrived_time":"23:00",
         "price":280000,
         "car_type":3
@@ -217,7 +218,7 @@ DEFAULT_TRIP_LIST = [
     {
         "start":"VungTau City",
         "end":"BinhTan District, HCMC",
-        "departure_time":"20:30",
+        "departure_time":time(hour=20, minute=30),
         "arrived_time":"23:30",
         "price":280000,
         "car_type":3
