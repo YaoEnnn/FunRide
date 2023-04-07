@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FunRide - Confirmation Email</title>
+  <style>
+    body {
+      background-color: #f1f1f1;
+    }
+
+    li {
+        padding-left: 25px;
+    }
+    
+    .container {
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 0px 5px #888;
+      margin: 50px auto;
+      max-width: 600px;
+      padding: 20px;
+    }
+    
+    .header {
+      background-color: #F8F8F8;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .header h1 {
+      margin: 0;
+      font-size: 32px;
+      font-weight: bold;
+    }
+    
+    .header p {
+      font-size: 10px;
+      font-weight: bold;
+      opacity: 0.5;
+      margin: 0;
+    }
+    
+    .order-info, .trip-info {
+      margin-bottom: 20px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 20px;
+    }
+    
+    .order-info h2, .trip-info h2 {
+      margin: 0 0 10px;
+    }
+    
+    .order-info ul, .trip-info ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: disc;
+    }
+    
+    .order-info li, .trip-info li {
+      margin-bottom: 5px;
+      padding-left: 20px;
+      text-indent: -20px;
+    }
+    
+    .trip-info li:last-child {
+      margin-bottom: 0;
+    }
+    
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #777;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>FunRide</h1>
+      <p>Receipt Number: {{receipt}}</p>
+    </div>
+    
+    <div class="order-info">
+      <h2>Order Information</h2>
+      <ul>
+        <li>Name: {{guest}}</li>
+        <li>Gender: {{gender}}</li>
+        <li>Phone: {{phone}}</li>
+        <li>Address: {{address}}</li>
+        <li>Price: {{price ~ ' VND'}}</li>
+        <li>Order Date: {{created_on}}</li>
+      </ul>
+    </div>
+    
+    <div class="trip-info">
+      <h2>Trip Information</h2>
+      <ul>
+        <li>From: {{start}}</li>
+        <li>To: {{end}}</li>
+        <li>Departure Date: {{departure_day}}</li>
+        <li>Departure Time: {{departure_time}}</li>
+        <li>Expected Arrival Time: {{arrived_time}}</li>
+        <li>Car Type: {{car_type}}</li>
+        <li>Seat: {{seat}}</li>
+      </ul>
+    </div>
+    
+    <div class="footer">
+      <p>If you have any questions or concerns, please contact us at:</p>
+      <p>FunRide, 123 Main St, Anytown USA<br>Phone: 555-555-1234 |

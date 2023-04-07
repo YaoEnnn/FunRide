@@ -1,10 +1,10 @@
 from app import app
+import routes
 from model import db, generate_default_trips, generate_default_car_type
 from os import path
 from setting import basedir
 from sqlalchemy import text
 import schedule
-import routes
 
 if __name__ == "__main__":
     if not path.exists(f"{basedir}/storage.db"):

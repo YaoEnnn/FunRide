@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>FunRide - Private Trip Order Confirmation</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        color: #333;
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+        margin: 0 0 20px 0;
+        font-weight: bold;
+      }
+
+      p {
+        margin: 0 0 10px 0;
+      }
+
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+      }
+
+      .header {
+        background-color: #f2f2f2;
+        color: #333;
+        padding: 10px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+
+      .customer-info, .trip-info {
+        margin-top: 20px;
+      }
+
+      .customer-info h3, .trip-info h3 {
+        margin-bottom: 10px;
+      }
+
+      .customer-info ul, .trip-info ul {
+        margin-left: 20px;
+      }
+
+      .customer-info ul li:before, .trip-info ul li:before {
+        content: "\2022";
+        color: #333;
+        display: inline-block;
+        width: 1em;
+        margin-left: -1em;
+      }
+
+      .footer {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .footer p {
+        font-size: 14px;
+        color: #777;
+      }
+      
+      .note {
+        margin-top: 10px;
+        font-size: 14px;
+        font-weight: bold;
+      	opacity: 0.5;
+	  }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>FunRide</h1>
+        <p style="font-size: 18px; font-weight: normal;">Private Trip Order Confirmation</p>
+      </div>
+      <div class="customer-info">
+        <h3>Customer Information:</h3>
+        <ul>
+          <li><strong>Name:</strong> {{guest}}</li>
+          <li><strong>Phone:</strong> {{phone}}</li>
+          <li><strong>Gender:</strong> {{gender}}</li>
+          <li><strong>Number of Guests:</strong> {{number_guest}}</li>
+        </ul>
+      </div>
+      <div class="trip-info">
+        <h3>Round-Trip Information:</h3>
+        <ul>
+          <li><strong>Departure Day:</strong> {{departure_day}}</li>
+          <li><strong>Departure Time:</strong> {{departure_time}}</li>
+          <li><strong>From:</strong> {{start}}</li>
+          <li><strong>To:</strong> {{end}}</li>
+          <li><strong>Note:</strong> {{note}}</li>
+          <li><strong>Back Day:</strong> {{back_day}}</li>
+          <li><strong>Back Time:</strong> {{back_time}}</li>
+          <li><strong>Car Type:</strong> {{car_type}}</li>
+        </ul>
+        <p class="note">Note: We will contact you soon at your phone number to confirm your trip and provide a price quote.</p>
+    </div>
+    
+    <div class="footer">
+      <p>If you have any questions or concerns, please contact us at:</p>
+      <p>FunRide, 123 Main St, Anytown USA<br>Phone: 555-555-1234 |
+     

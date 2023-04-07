@@ -1,7 +1,6 @@
 from app import app
 from flask import request, jsonify
 from model import Trip
-from sqlalchemy import extract
 from datetime import datetime, timedelta
 
 @app.route('/trip/search', methods = ['GET', 'POST'])
@@ -48,6 +47,39 @@ def search_trip():
             'status':'OK',
             'msg': result
         })
+
+#display all trips route
+@app.route('/trip/display-all', methods = ['POST'])
+def display_all_trip():
+    #get current time
+    current_time = datetime.combine(datetime.today(), datetime.now().time())
+
+    #get current date
+    today = datetime.today().date()
+    
+    #Filter today trips later than current time 1 hour
+    trips_today = Trip.query.filter(Trip.departure_time >= (current_time + timedelta(hours=1)).time(),
+                              Trip.departure_day == today).all()
+
+    # Filter trips from tomorrow
+    trips = Trip.query.filter(Trip.departure_day > today).all()
+    
+    #Return all Trips that satisfy requirements
+    result = []
+    for trip in trips_today:
+        data = {'id': trip.id, 'start': trip.start, 'end': trip.end, 'departure_time': trip.departure_time.strftime("%H:%M"), 
+                            'arrived_time': trip.arrived_time, 'price': trip.price, 'departure_day': trip.departure_day, 'car_type': trip.car_type.name}
+        result.append(data)
+        
+    for trip in trips:
+        data = {'id': trip.id, 'start': trip.start, 'end': trip.end, 'departure_time': trip.departure_time.strftime("%H:%M"), 
+                            'arrived_time': trip.arrived_time, 'price': trip.price, 'departure_day': trip.departure_day, 'car_type': trip.car_type.name}
+        result.append(data)
+
+    return jsonify({
+        'status':'OK',
+        'msg': result
+    })
 
 #DISTRICT 1 ----> BAOLOC TRIP    
 @app.route('/recommend-trip/Q1-BL', methods = ['POST'])
