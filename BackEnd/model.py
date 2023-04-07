@@ -3,6 +3,7 @@ from setting import DATABASE_URI, TOKEN_EXPIRY, RECOVERY_TOKEN_EXPIRY, DEFAULT_T
 from flask_sqlalchemy import SQLAlchemy
 from random import randint
 from datetime import timedelta, datetime
+import uuid
 from secrets import token_urlsafe
 from werkzeug.security import generate_password_hash
 
@@ -33,6 +34,8 @@ class Trip(db.Model):
     departure_day = db.Column(db.String(50), nullable = False)
     car_id = db.Column(db.Integer, db.ForeignKey("car_type.id"), nullable = False)
 
+    order_ref = db.relationship('Order', backref = 'trip', lazy=True, cascade = 'all, delete')
+
     def __init__(self, start, end, departure_time, arrived_time, price, departure_day, car_id):
         self.start = start
         self.end = end
@@ -48,19 +51,21 @@ class Order(db.Model):
     gender = db.Column(db.String(50), nullable = False)
     phone = db.Column(db.Integer, nullable = False)
     email = db.Column(db.String(100), nullable = False)
-    address = db.Column (db.String(200), nullable = False)
-    receipt = db.Column (db.Integer, nullable = False)
-    trip_id = db.Column (db.Integer, db.ForeignKey("trip.id"), nullable = False)
+    address = db.Column(db.String(200), nullable = False)
+    receipt = db.Column(db.Text, nullable = False, unique = True)
+    trip_id = db.Column(db.Integer, db.ForeignKey("trip.id"), nullable = False)
+    price = db.Column(db.Integer, nullable = False)
     created_on = db.Column(db.DateTime, default = db.func.now())
 
-    def __init__(self, guest, gender, phone, email, address, trip_id):
+    def __init__(self, guest, gender, phone, email, address, trip_id, price):
         self.guest = guest
         self.gender = gender
         self.phone = phone
         self.email = email
         self.address = address
         self.trip_id = trip_id
-        self.receipt = randint(1000000, 9999999)
+        self.receipt = uuid.uuid4().hex
+        self.price = price
 
 class Seat(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -79,7 +84,7 @@ class PrivateOrder(db.Model):
     phone = db.Column(db.Integer, nullable = False)
     email = db.Column(db.String(100), nullable = False)
     gender = db.Column(db.String(50), nullable = False)
-    note = db.Column(db.String(300), nullable = True)
+    note = db.Column(db.Text, nullable = True)
     number_guest = db.Column(db.Integer, nullable = False)
     departure_day = db.Column(db.String(50), nullable = False)
     departure_time = db.Column(db.String(50), nullable = False)
@@ -134,7 +139,7 @@ class Session(db.Model):
         self.user_id = user_id
         self.token = token_urlsafe(100)
 
-class RecoveryPassword():
+class RecoveryPassword(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable = False)
     code = db.Column(db.Integer, nullable = False)
@@ -145,6 +150,17 @@ class RecoveryPassword():
         self.user_id = user_id
         self.code = randint(100000, 999999)
         self.url_token = token_urlsafe(100)
+
+class Offer(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    code = db.Column(db.String(10), nullable = False, unique = True)
+    discount = db.Column(db.Integer, nullable = False)
+    available = db.Column(db.Integer, nullable = False)
+
+    def __init__(self, code, discount, available):
+        self.code = code
+        self.discount = discount
+        self.available = available
 
 def generate_default_car_type():
     for record in DEFAULT_CAR_TYPE:
