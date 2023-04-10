@@ -63,7 +63,8 @@ def booking_seat(trip_id):
 
                     #Add to DB
                     try:
-                        new_order = Order(guest = guest, gender = gender, phone = phone, email = email, address = address, trip_id = trip_id, price = price)
+                        new_order = Order(guest = guest, gender = gender, phone = phone, email = email,
+                                           address = address, trip_id = trip_id, price = price, offer_id = offer.id)
                         db.session.add(new_order)
                         db.session.commit()
                     except IntegrityError:
@@ -89,8 +90,14 @@ def booking_seat(trip_id):
                         db.session.commit()
 
                     #send email to customer
-                    auto_send_mail(email, trip.start, trip.end, trip.departure_day, trip.departure_time.strftime("%H:%M"), trip.arrived_time,
-                                guest, gender, phone, address, price, new_order.receipt, new_order.created_on, seat, trip.car_type.name)
+                    auto_send_mail("Thank You For Choosing FunRide!", email, trip.start, trip.end, trip.departure_day, 
+                                   trip.departure_time.strftime("%H:%M"), trip.arrived_time, guest, gender, phone,
+                                     address, price, new_order.receipt, new_order.created_on, seat, trip.car_type.name, offer_code)
+                    
+                    # send mail to company
+                    auto_send_mail("You Have New Order!", "Funride.company.2023@gmail.com", trip.start, trip.end, trip.departure_day,
+                                    trip.departure_time.strftime("%H:%M"), trip.arrived_time, guest, gender, phone,
+                                      address, price, new_order.receipt, new_order.created_on, seat, trip.car_type.name, offer_code)
                     
                     return jsonify({
                         'status': 'OK',
@@ -119,7 +126,8 @@ def booking_seat(trip_id):
 
                 #Add to DB
                 try:
-                    new_order = Order(guest = guest, gender = gender, phone = phone, email = email, address = address, trip_id = trip_id, price = price)
+                    new_order = Order(guest = guest, gender = gender, phone = phone, email = email,
+                                       address = address, trip_id = trip_id, price = price, offer_id = None)
                     db.session.add(new_order)
                     db.session.commit()
                 except IntegrityError:
@@ -136,8 +144,12 @@ def booking_seat(trip_id):
                     db.session.commit()
 
                 # send email to customer
-                auto_send_mail(email, trip.start, trip.end, trip.departure_day, trip.departure_time.strftime("%H:%M"), trip.arrived_time,
-                               guest, gender, phone, address, price, new_order.receipt, new_order.created_on, seat, trip.car_type.name)
+                auto_send_mail("Thank You For Choosing FunRide!", email, trip.start, trip.end, trip.departure_day, trip.departure_time.strftime("%H:%M"), trip.arrived_time,
+                               guest, gender, phone, address, price, new_order.receipt, new_order.created_on, seat, trip.car_type.name, "N/A")
+                
+                # send mail to company
+                auto_send_mail("You Have New Order!", "Funride.company.2023@gmail.com", trip.start, trip.end, trip.departure_day, trip.departure_time.strftime("%H:%M"), trip.arrived_time,
+                               guest, gender, phone, address, price, new_order.receipt, new_order.created_on, seat, trip.car_type.name, "N/A")
                 
                 return jsonify({
                     'status': 'OK',
@@ -245,9 +257,13 @@ def booking_private():
         db.session.commit()
         
         #Auto send confimination to User
-        auto_send_mail_round(email, guest, phone, gender, number_guest, departure_day,
+        auto_send_mail_round("Thank You For Choosing FunRide!", email, guest, phone, gender, number_guest, departure_day,
                              departure_time, start, end, back_day, back_time, car_type, note)
-
+        
+        #Auto send mail to company for new ord
+        auto_send_mail_round("You Have New Private Round-Trip Order!", "Funride.company.2023@gmail.com", guest, phone, gender, number_guest, departure_day,
+                             departure_time, start, end, back_day, back_time, car_type, note)
+        
         return jsonify({
             'status':'OK',
             'msg':{
@@ -297,8 +313,12 @@ def booking_private():
         db.session.commit()
         
         #Auto send confimination to User
-        auto_send_mail_private(email, guest, phone, gender, number_guest, departure_day,
+        auto_send_mail_private("Thank You For Choosing FunRide!", email, guest, phone, gender, number_guest, departure_day,
                                 departure_time, start, end, car_type, note)
+        
+        #Auto send mail to company for new ord
+        auto_send_mail_private("You Have New Private Order!", "Funride.company.2023@gmail.com", guest, phone, gender, number_guest, departure_day,
+                             departure_time, start, end, car_type, note)
 
         return jsonify({
             'status':'OK',
@@ -327,11 +347,11 @@ def is_valid_email(email):
         return False
 
 #Function for Auto Sending Email to User Booking Seat
-def auto_send_mail(email, start, end, departure_day, departure_time,
+def auto_send_mail(message, email, start, end, departure_day, departure_time,
                     arrived_time, guest, gender, phone,
-                      address, price, receipt, created_on, seat, car_type):
+                      address, price, receipt, created_on, seat, car_type, offer_code):
     
-    msg = Message('Thank You For Choosing FunRide!',
+    msg = Message(message,
     sender=app.config.get("MAIL_USERNAME"),
     recipients=[email])
     msg.html = render_template("booking_seat.html",
@@ -348,13 +368,14 @@ def auto_send_mail(email, start, end, departure_day, departure_time,
     receipt = receipt, 
     created_on = created_on,
     car_type = car_type,
+    offer_code = offer_code,
     seat = seat)
     mail.send(msg)
 
-def auto_send_mail_round(email, guest, phone, gender, number_guest, departure_day,
+def auto_send_mail_round(message, email, guest, phone, gender, number_guest, departure_day,
                          departure_time, start, end, back_day, back_time, car_type, note):
     
-    msg = Message('Thank You For Choosing FunRide!',
+    msg = Message(message,
     sender=app.config.get("MAIL_USERNAME"),
     recipients=[email])
     msg.html = render_template("private_round_trip.html",
@@ -372,10 +393,10 @@ def auto_send_mail_round(email, guest, phone, gender, number_guest, departure_da
     note = note)
     mail.send(msg)
 
-def auto_send_mail_private(email, guest, phone, gender, number_guest, departure_day,
+def auto_send_mail_private(message, email, guest, phone, gender, number_guest, departure_day,
                          departure_time, start, end, car_type, note):
     
-    msg = Message('Thank You For Choosing FunRide!',
+    msg = Message(message,
     sender=app.config.get("MAIL_USERNAME"),
     recipients=[email])
     msg.html = render_template("private_trip.html",

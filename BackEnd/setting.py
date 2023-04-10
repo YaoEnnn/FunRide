@@ -13,12 +13,13 @@ TOKEN_EXPIRY: int = 15
 # Time for Expiry of Token Change Password
 RECOVERY_TOKEN_EXPIRY: int = 15
 
+#Config company mail
 MAIL_SETTING = {
     "MAIL_SERVER": 'smtp.gmail.com',
     "MAIL_PORT": 465,
     "MAIL_USE_SSL": True,
     "MAIL_USERNAME": "noreply.funride@gmail.com",
-    "MAIL_PASSWORD": "toexngsyykszouvn"
+    "MAIL_PASSWORD": "toexngsyykszouvn" #funride1234
 }
 
 # Default Car Type List
