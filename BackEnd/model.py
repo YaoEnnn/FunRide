@@ -56,11 +56,11 @@ class Order(db.Model):
     trip_id = db.Column(db.Integer, db.ForeignKey("trip.id"), nullable = False)
     price = db.Column(db.Integer, nullable = False)
     created_on = db.Column(db.DateTime, default = db.func.now())
-    offer_id = db.Column(db.Integer, db.ForeignKey("offer.id"), nullable = True)
+    offer_code = db.Column(db.String(50), nullable = True)
 
     seat_ref = db.relationship('Seat', backref = 'order', lazy=True, cascade = 'all, delete')
 
-    def __init__(self, guest, gender, phone, email, address, trip_id, price, offer_id):
+    def __init__(self, guest, gender, phone, email, address, trip_id, price, offer_code):
         self.guest = guest
         self.gender = gender
         self.phone = phone
@@ -69,7 +69,7 @@ class Order(db.Model):
         self.trip_id = trip_id
         self.receipt = uuid.uuid4().hex
         self.price = price
-        self.offer_id = offer_id
+        self.offer_code = offer_code
 
 class Seat(db.Model):
     id = db.Column(db.Integer, primary_key = True)

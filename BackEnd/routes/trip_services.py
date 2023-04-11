@@ -68,6 +68,25 @@ def display_all_trip():
     
     return ReturnTrips(all_trips)
 
+#display 1 trip
+@app.route('/trip/get/<trip_id>', methods = ['POST'])
+def get_one_trip(trip_id):
+    trip = Trip.query.get(trip_id)
+    if not trip:
+        return jsonify({
+            'status':'FAIL',
+            'err':'No Trip Found'
+        })
+    
+    data = {'id': trip.id, 'start': trip.start, 'end': trip.end, 'departure_time': trip.departure_time.strftime("%H:%M"), 
+                            'arrived_time': trip.arrived_time, 'price': trip.price, 'departure_day': trip.departure_day, 'car_type': trip.car_type.name}
+    
+    return jsonify({
+        'status':'OK',
+        'msg':data
+    })
+    
+#display trips from user's requirements
 @app.route('/trip/order-by-user', methods = ['GET', 'POST'])
 def order_by_user():
     #get current time

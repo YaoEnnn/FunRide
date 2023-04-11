@@ -64,7 +64,7 @@ def booking_seat(trip_id):
                     #Add to DB
                     try:
                         new_order = Order(guest = guest, gender = gender, phone = phone, email = email,
-                                           address = address, trip_id = trip_id, price = price, offer_id = offer.id)
+                                           address = address, trip_id = trip_id, price = price, offer_code = offer_code)
                         db.session.add(new_order)
                         db.session.commit()
                     except IntegrityError:
@@ -78,7 +78,6 @@ def booking_seat(trip_id):
                     offer.available = offer.available - 1
                     db.session.commit()
 
-                    #check if this offer could be use more?
                     if offer.available == 0:
                         db.session.delete(offer)
                         db.session.commit()
@@ -115,7 +114,8 @@ def booking_seat(trip_id):
                             'price': new_order.price,
                             'receipt': new_order.receipt,
                             'created_on':new_order.created_on,
-                            'seat': seat
+                            'seat': seat,
+                            'offer_code':offer_code
                         } 
                     })
                 
@@ -127,7 +127,7 @@ def booking_seat(trip_id):
                 #Add to DB
                 try:
                     new_order = Order(guest = guest, gender = gender, phone = phone, email = email,
-                                       address = address, trip_id = trip_id, price = price, offer_id = None)
+                                       address = address, trip_id = trip_id, price = price, offer_code = None)
                     db.session.add(new_order)
                     db.session.commit()
                 except IntegrityError:
