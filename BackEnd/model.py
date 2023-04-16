@@ -1,5 +1,5 @@
 from app import app
-from setting import DATABASE_URI, TOKEN_EXPIRY, RECOVERY_TOKEN_EXPIRY, DEFAULT_TRIP_LIST, DEFAULT_CAR_TYPE
+from setting import DATABASE_URI, TOKEN_EXPIRY, RECOVERY_TOKEN_EXPIRY, DEFAULT_TRIP_LIST, DEFAULT_CAR_TYPE, DEFAULT_ROLE_LIST, DEFAULT_USER_LIST
 from flask_sqlalchemy import SQLAlchemy
 from random import randint
 from datetime import timedelta, datetime
@@ -118,20 +118,24 @@ class PrivateOrder(db.Model):
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    user_name = db.Column(db.String(50), nullable = False)
+    user_name = db.Column(db.String(50), nullable = False, unique = True)
     password = db.Column(db.String(100), nullable = False)
     name = db.Column(db.String(100), nullable = False)
-    gender = db.Column(db.String(50), default = "Unknown", nullable = False)
-    email = db.Column(db.String(100), nullable = False)
-    phone = db.Column(db.Integer, nullable = False)
+    email = db.Column(db.String(100), nullable = False, unique = True)
+    phone = db.Column(db.Integer, nullable = False, unique = True)
     address = db.Column(db.String(150), default = "Unknown", nullable = False)
+    gender = db.Column(db.String(50), default = "Unknown", nullable = False)
+    role_id = db.Column(db.Integer, db.ForeignKey("role.id"), nullable = False)
 
-    def __init__(self, user_name, password, name, email, phone):
+    session_ref = db.relationship('Session', backref = 'user', lazy=True, cascade = 'all, delete')
+
+    def __init__(self, user_name, password, name, email, phone, role_id):
         self.user_name = user_name.strip()
         self.password = generate_password_hash(password).strip()
         self.name = name
         self.phone = phone
         self.email = email
+        self.role_id = role_id
 
 class Session(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -167,6 +171,13 @@ class Offer(db.Model):
         self.discount = discount
         self.available = available
 
+class Role(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String(20), nullable = False)
+
+    def __init__(self, name):
+        self.name = name
+
 def generate_default_car_type():
     for record in DEFAULT_CAR_TYPE:
         if not CarType.query.filter_by(name = record["name"]).first():
@@ -193,3 +204,16 @@ def generate_default_trips():
             db.session.add(trip)
             db.session.commit()
 
+def generate_default_role():
+    for record in DEFAULT_ROLE_LIST:
+        if not Role.query.filter_by(name = record["name"]).first():
+            new_role = Role(record["name"])
+            db.session.add(new_role)
+            db.session.commit()
+
+def generate_default_user():
+    for record in DEFAULT_USER_LIST:
+        if not User.query.filter_by(name = record['name']).first():
+            new_user = User(record['user_name'], record['password'], record['name'], record['email'], record['phone'], record['role_id'])
+            db.session.add(new_user)
+            db.session.commit()

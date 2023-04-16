@@ -1,45 +1,21 @@
 from flask import jsonify, request
 from app import app
-from model import Offer, db, Trip, Order, CarType, PrivateOrder
+from model import Offer, db, Trip, Order, CarType, PrivateOrder, User, Session, Role
+from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
-from sqlalchemy.exc import IntegrityError
-
-#add discount
-@app.route('/admin/add-discount', methods = ['GET', 'POST'])
-def add_discount():
-    #get data from admin
-    data = request.json
-    if data and 'code' in data and 'discount' in data and 'available' in data:
-        code = data['code'].strip()
-        discount = data['discount']
-        available = data['available']
-    else:
-        return jsonify({
-            'status':'FAIL',
-            'msg':'Missing Parameters'
-        })
-    
-    #try add discount code into DB
-    try:
-        offer = Offer(code = code, discount = discount, available = available)
-        db.session.add(offer)
-        db.session.commit()
-
-        return jsonify({
-            'status':'OK',
-            'msg':'Add Discount Successfully'
-        })
-
-    except IntegrityError:
-        db.session.rollback()
-        return jsonify({
-            'status':'FAIL',
-            'err':'Code Has Already Existed'
-        })
+from datetime import datetime
+from .booking import is_valid_email
 
 #show all discount
 @app.route('/admin/display-all-discount', methods = ['POST'])
 def display_discount():
+    #check login
+    if not check_login():
+        return jsonify({
+            'status':'FAIL',
+            'err':'Unauthorized'
+        })
+    
     discounts = Offer.query.all()
     result = []
     #if having available discount
@@ -59,34 +35,16 @@ def display_discount():
             'err':'No Discount Available'
         })
 
-#delete discount
-@app.route('/admin/delete-discount/<discount_id>', methods = ['DELETE'])
-def delete_discount(discount_id):
-    #get discount from id
-    discount = Offer.query.get(discount_id)
-    if discount:
-        try:
-            db.session.delete(discount)
-            db.session.commit()
-            return jsonify({
-                'status':'OK',
-                'msg':'Discount Deleted'
-            })
-        except:
-            db.session.rollback()
-            return jsonify({
-                'status':'FAIL',
-                'err':'Could Not Delete Discount Code'
-            })
-    else:
-        return jsonify({
-            'status':'FAIL',
-            'err':'No Discount Found'
-        })
-
 #add new trip
 @app.route('/admin/add-trip', methods = ['GET', 'POST'])
 def add_trip():
+    #check login
+    if not check_login():
+        return jsonify({
+            'status':'FAIL',
+            'err':'Unauthorized'
+        })
+    
     #get data from user
     data = request.json
     if (data and 'start' in data and 'end' in data and 'departure_time' in data and
@@ -136,6 +94,13 @@ def add_trip():
 #update trip
 @app.route('/admin/update-trip/<trip_id>', methods = ['PUT'])
 def update_trip(trip_id):
+    #check login
+    if not check_login():
+        return jsonify({
+            'status':'FAIL',
+            'err':'Unauthorized'
+        })
+    
     #get trip from db
     trip = Trip.query.get(trip_id)
     
@@ -176,33 +141,16 @@ def update_trip(trip_id):
         'msg': 'Trip updated successfully'
         })
 
-#delete trip (manager)
-@app.route('/manager/delete/trip/<trip_id>', methods = ['DELETE'])
-def delete_trip(trip_id):
-    trip = Trip.query.get(trip_id)
-    if trip:
-        try:
-            db.session.delete(trip)
-            db.session.commit()
-            return jsonify({
-                'status':'OK',
-                'msg':'Trip Deleted'
-            })
-        except:
-            db.session.rollback()
-            return jsonify({
-                'status':'FAIL',
-                'err':'Could Not Delete Trip'
-            })
-    else:
-        return jsonify({
-            'status':'FAIL',
-            'err':'No Trip Found'
-        })
-
 #show all orders
 @app.route('/admin/display-all/order', methods = ['POST'])
 def display_all_order():
+    #check login
+    if not check_login():
+        return jsonify({
+            'status':'FAIL',
+            'err':'Unauthorized'
+        })
+    
     orders = Order.query.all()
     if not orders:
         return jsonify({
@@ -233,6 +181,13 @@ def display_all_order():
 #get one order
 @app.route('/admin/get/order/<order_id>', methods = ['POST'])
 def display_one_order(order_id):
+    #check login
+    if not check_login():
+        return jsonify({
+            'status':'FAIL',
+            'err':'Unauthorized'
+        })
+    
     order = Order.query.get(order_id)
     if not order:
         return jsonify({
@@ -260,6 +215,13 @@ def display_one_order(order_id):
 #delete order
 @app.route('/admin/delete/order/<order_id>', methods = ['DELETE'])
 def delete_order(order_id):
+    #check login
+    if not check_login():
+        return jsonify({
+            'status':'FAIL',
+            'err':'Unauthorized'
+        })
+    
     order = Order.query.get(order_id)
     if order:
         try:
@@ -284,6 +246,13 @@ def delete_order(order_id):
 #show all private orders
 @app.route('/admin/display-all/private-order', methods = ['POST'])
 def display_all_private_order():
+    #check login
+    if not check_login():
+        return jsonify({
+            'status':'FAIL',
+            'err':'Unauthorized'
+        })
+    
     private_orders = PrivateOrder.query.all()
     if not private_orders:
         return jsonify({
@@ -315,6 +284,13 @@ def display_all_private_order():
 #get 1 private order
 @app.route('/admin/get/private-order/<order_id>', methods = ['POST'])
 def display_one_private_order(order_id):
+    #check login
+    if not check_login():
+        return jsonify({
+            'status':'FAIL',
+            'err':'Unauthorized'
+        })
+    
     private_order = PrivateOrder.query.get(order_id)
     if not private_order:
         return jsonify({
@@ -342,6 +318,13 @@ def display_one_private_order(order_id):
 #delete private order
 @app.route('/admin/delete/private-order/<order_id>', methods = ['DELETE'])
 def delete_private_order(order_id):
+    #check login
+    if not check_login():
+        return jsonify({
+            'status':'FAIL',
+            'err':'Unauthorized'
+        })
+    
     private_order = PrivateOrder.query.get(order_id)
     if not private_order:
         return jsonify({
@@ -366,6 +349,13 @@ def delete_private_order(order_id):
 #Search Order
 @app.route('/admin/search-order', methods = ['POST'])
 def search_order():
+    #check login
+    if not check_login():
+        return jsonify({
+            'status':'FAIL',
+            'err':'Unauthorized'
+        })
+    
     data = request.json
     if data and 'user_data' in data:
         user_data = data['user_data'].strip()
@@ -405,3 +395,297 @@ def search_order():
             'status':'FAIL',
             'err':'No Order Found'
         })
+    
+@app.route('/admin/search-private-order', methods = ['POST'])
+def search_private_order():
+    #check login
+    if not check_login():
+        return jsonify({
+            'status':'FAIL',
+            'err':'Unauthorized'
+        })
+    
+    data = request.json
+    if data and 'user_data' in data:
+        user_data = data['user_data'].strip()
+    else:
+        return jsonify({
+            'status':'FAIL',
+            'err':'Missing Parameters'
+        })
+    
+    orders = PrivateOrder.query.filter((Order.guest.ilike(f'%{user_data}%')) | (Order.phone.ilike(f'%{user_data}%'))).all()
+
+    if orders:
+        result = []
+
+        for order in orders:
+            car = CarType.query.get(order.car_id)
+
+            if order.round_trip == True:
+                data = {'id':order.id, 'name':order.guest, 'phone':order.phone, 'email':order.email, 'gender':order.gender,
+                    'note':order.note, 'number_guest':order.number_guest, 'departure_day':order.departure_day, 'departure_time':order.departure_time,
+                    'start':order.start, 'end':order.end, 'round_trip':order.round_trip, 'back_day':order.back_day, 'back_time':order.back_time,
+                    'car_type':car.name}
+            else:
+                data = {'id':order.id, 'name':order.guest, 'phone':order.phone, 'email':order.email, 'gender':order.gender,
+                    'note':order.note, 'number_guest':order.number_guest, 'departure_day':order.departure_day, 'departure_time':order.departure_time,
+                    'start':order.start, 'end':order.end, 'car_type':car.name}
+            
+            result.append(data)
+
+        return jsonify({
+            'status':'OK',
+            'msg':result
+        })
+    
+    else:
+        return jsonify({
+            'status':'FAIL',
+            'err':'No Private Order Found'
+        })
+
+#Login Route for Admin and Manager
+@app.route('/admin/login', methods = ['POST'])
+def login_func():
+    data = request.json
+    if not data or not 'user_name' in data or not 'password' in data:
+        return jsonify({
+            'status':'FAIL',
+            'err':'Missing Parameters'
+        })
+    
+    user_name = data['user_name'].strip()
+    password = data['password'].strip()
+
+    #check user name
+    user = User.query.filter(User.user_name == user_name).first()
+
+    if not user:
+        return jsonify({
+            'status':'FAIL',
+            'err':'Unvalid User-Name'
+        })
+    
+    #checf password
+    if not check_password_hash(user.password, password):
+        return jsonify({
+            'status':'FAIL',
+            'err':'Unvalid Password'
+        })
+    #check password hash = True
+    else:
+        session = Session(user.id)
+        db.session.add(session)
+        db.session.commit()
+
+        #return token for logging in
+        return jsonify({
+            'status':'OK',
+            'msg':session.token
+        })
+    
+@app.route('/admin/logout', methods = ['POST'])
+def logout():
+    #check login
+    if not check_login():
+        return jsonify({
+            'status':'FAIL',
+            'err':'Unauthorized'
+        })
+    
+    #get current user
+    user = request.session.user
+
+    user_session = Session.query.filter_by(user_id = user.id).first()
+
+    if user_session is not None:
+        # delete user session
+        db.session.delete(user_session)
+        db.session.commit()
+        return jsonify({
+            'status': 'OK',
+            'msg': 'Logout Successfully'
+        })
+    else:
+        return jsonify({
+            'status': 'FAIL',
+            'err': 'Fail to Logout'
+        })
+
+@app.route('/admin/logout-all-devices', methods = ['POST'])
+def logout_all():
+    #check login
+    if not check_login():
+        return jsonify({
+            'status':'FAIL',
+            'err':'Unauthorized'
+        })
+    
+    #get current user
+    user = request.session.user
+
+    user_sessions = Session.query.filter_by(user_id = user.id).all()
+
+    if user_sessions is not None:
+        for user_session in user_sessions:
+            # delete user session
+            db.session.delete(user_session)
+            db.session.commit()
+        return jsonify({
+            'status': 'OK',
+            'msg': 'Logout Successfully'
+        })
+    else:
+        return jsonify({
+            'status': 'FAIL',
+            'err': 'Fail to Logout'
+        })
+    
+#Update info for data or manager
+@app.route('/admin/update-info/', methods = ['POST'])
+def update_user_info():
+    #check login
+    if not check_login():
+        return jsonify({
+            'status':'FAIL',
+            'err':'Unauthorized'
+        })
+    
+    data = request.json
+    user = User.query.get(request.session.user.id)
+    if not data:
+        return jsonify({
+            'status':'FAIL',
+            'err':'Missing Paramerters'
+        })
+    
+    if 'name' in data:
+        name = data['name'].strip()
+        user.name = name
+    if 'phone' in data:
+        phone = data['phone']
+        user.phone = phone
+    if 'email' in data:
+        email = data['email'].strip()
+        #Validating email
+        if not is_valid_email(email):
+            return jsonify({
+                'status':'FAIL',
+                'err':'Invalid Email'
+            })
+        else:
+            user.email = email
+    if 'address' in data:
+        address = data['address'].strip()
+        user.address = address
+    if 'gender' in data:
+        gender = data['gender'].strip()
+        user.gender = gender
+    
+    db.session.commit()
+
+    return jsonify({
+        'status':'OK',
+        'msg':'Information Updated'
+    })
+
+#view personal profile
+@app.route('/admin/my-profile', methods = ['POST'])
+def my_profile():
+    #check login
+    if not check_login():
+        return jsonify({
+            'status':'FAIL',
+            'err':'Unauthorized'
+        })
+    
+    #get current user
+    user = request.session.user
+
+    #get user role
+    role = Role.query.get(user.role_id)
+
+    profile = {'user_name':user.user_name, 'name':user.name, 'phone':user.phone,
+                'email':user.email, 'address':user.address, 'gender':user.gender, 'role':role.name}
+    
+    return jsonify({
+        'status':'OK',
+        'msg':profile
+    })
+
+#change password
+@app.route('/admin/change-password', methods = ['POST'])
+def change_password():
+    #check login
+    if not check_login():
+        return jsonify({
+            'status':'FAIL',
+            'err':'Unauthorized'
+        })
+    
+    data = request.json
+    if not data or not 'old_password' in data or not 'new_password' in data or not 'verify_password' in data:
+        return jsonify({
+            'status':'FAIL',
+            'err':'Missing Parameters'
+        })
+    
+    old_password = data['old_password']
+    new_password = data['new_password']
+    verify_password = data['verify_password']
+
+    #get current user info
+    user = request.session.user
+
+    if not check_password_hash(user.password, old_password):
+        return jsonify({
+            'status':'FAIL',
+            'err':'Wrong Old Password'
+        })
+    
+    if check_password_hash(user.password, new_password):
+        return jsonify({
+            'status':'FAIL',
+            'err':'New Password is The Same To Old Password'
+        })
+    
+    if new_password != verify_password:
+        return jsonify({
+            'status':'FAIL',
+            'err':'Double Check Password Failed'
+        })
+    
+    user.password = generate_password_hash(new_password)
+    db.session.commit()
+
+    return jsonify({
+        'status':'OK',
+        'msg':'Password Changed'
+    })
+
+def check_login():
+    #get token from FrontEnd
+    token = request.headers.get("Authorization")
+
+    if not token:
+        return False
+
+    #get session from token
+    session = Session.query.filter_by(token=token).first()
+    
+    if not session:
+        return False
+
+    # Session exists, time to get user here
+    request.session = session
+    
+    # CHecking for expiry
+    if datetime.now() > session.expiry_day:
+        
+        db.session.delete(session)
+        db.session.commit()
+        
+        return False
+   
+    return True;

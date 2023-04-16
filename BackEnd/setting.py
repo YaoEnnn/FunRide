@@ -233,3 +233,31 @@ DEFAULT_TRIP_LIST = [
         "car_type":3
     }
 ]
+
+DEFAULT_ROLE_LIST = [
+    {
+        "name":"Manager"
+    },
+    {
+        "name":"Admin"
+    }
+]
+
+DEFAULT_USER_LIST = [
+    {
+        "user_name":"manager",
+        "password":"manager",
+        "name":"Manager",
+        "phone":"Unknown",
+        "email":"Unknown",
+        "role_id":1
+    },
+    {
+        "user_name":"admin",
+        "password":"admin",
+        "name":"Admin1",
+        "phone":"0123456788",
+        "email":"admin@gmail.com",
+        "role_id":2
+    }
+]
