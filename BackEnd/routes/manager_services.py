@@ -1,7 +1,8 @@
 from flask import jsonify, request
 from app import app
 from .admin_services import check_login
-from model import db, Offer, Trip, User
+from model import db, Offer, Trip, User, Session
+from .booking import is_valid_email
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import generate_password_hash
 
@@ -155,6 +156,12 @@ def add_admin():
     name = data['name'].strip()
     phone = data['phone']
 
+    if not is_valid_email(email):
+        return jsonify({
+            'status':'FAIL',
+            'err':'Unvalid Email'
+        })
+
     try:
         user = User(user_name = user_name, password = password, email = email, name = name, phone = phone, role_id = 2)
         db.session.add(user)
@@ -198,6 +205,15 @@ def delete_admin(admin_id):
     
     db.session.delete(admin)
     db.session.commit()
+
+    #delete session of deleted admin
+    admin_sessions = Session.query.filter(Session.user_id == admin_id).all()
+    
+    if admin_sessions:
+        for admin_session in admin_sessions:
+            db.session.delete(admin_session)
+            db.session.commit()
+
     return jsonify({
         'status':'OK',
         'msg':'Admin Deleted'
