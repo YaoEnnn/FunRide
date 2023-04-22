@@ -128,6 +128,7 @@ class User(db.Model):
     role_id = db.Column(db.Integer, db.ForeignKey("role.id"), nullable = False)
 
     session_ref = db.relationship('Session', backref = 'user', lazy=True, cascade = 'all, delete')
+    recovery_ref = db.relationship('RecoveryPassword', backref = 'user', lazy=True, cascade = 'all, delete')
 
     def __init__(self, user_name, password, name, email, phone, role_id):
         self.user_name = user_name.strip()
@@ -151,13 +152,11 @@ class RecoveryPassword(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable = False)
     code = db.Column(db.Integer, nullable = False)
-    url_token = db.Column(db.String(100), unique = True, nullable = False)
     expiry_time = db.Column(db.DateTime, default = datetime.now() + timedelta(minutes = RECOVERY_TOKEN_EXPIRY))
 
     def __init__(self, user_id):
         self.user_id = user_id
         self.code = randint(100000, 999999)
-        self.url_token = token_urlsafe(100)
 
 class Offer(db.Model):
     id = db.Column(db.Integer, primary_key = True)
