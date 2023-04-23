@@ -1,4 +1,16 @@
 @import "../../globalStyle.scss";
+@import "../../globalMixins.scss";
 .base {
-  color: red;
+  background-color: white;
+  .mainInput{
+    display: flex;
+    gap:1em;
+
+    .customInput{
+      background-color: black;
+      color: red;
+      font-size: 80em;
+      height: 50em;
+    }
+  }
 }

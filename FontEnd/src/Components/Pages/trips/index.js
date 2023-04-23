@@ -5,7 +5,9 @@ import React, { Component } from "react";
 function Trips() {
   return (
     <AnimatedOutlet>
-      <div className={styles.base}>Trips Page</div>
+      <div className={styles.base}>
+
+      </div>
     </AnimatedOutlet>
   );
 }
