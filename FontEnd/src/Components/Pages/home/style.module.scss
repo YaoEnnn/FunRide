@@ -1,4 +1,82 @@
 @import "../../globalStyle.scss";
+@import "../../globalMixins.scss";
 .base {
-  color: red;
+  .header {
+    height: 30em;
+    background-color: rgba(73, 69, 69, 0.658);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    > img {
+      height: 20em;
+      margin-bottom: 3em;
+    }
+
+    > p {
+      @include lightfont;
+      font-size: 2em;
+    }
+  }
+  > div:nth-child(2) {
+    height: 50em;
+    > h1 {
+      @include boldfont;
+      font-size: 2.5em;
+    }
+    > .popular {
+      display: flex;
+      margin: auto;
+      flex-direction: column;
+      > div {
+        display: flex;
+        margin: auto;
+        > div {
+          background-color: aqua;
+          text-align: center;
+          height: 4em;
+          width: 13em;
+          @include lightfont;
+          @include hover_underly;
+          @include SlightRoundBorder;
+          margin: 1em;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+      }
+    }
+    > .reviews {
+      padding: 5em;
+      width: 100em;
+      padding: 2em;
+      height: 40em;
+      text-align: center;
+      margin: auto;
+      margin-top: 5em;
+      justify-content: center;
+      @include SquareRoundBorder;
+      border-radius: 2em;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+      > .reviewPost {
+        .slideshow {
+          display: flex;
+          overflow: hidden;
+        }
+        .slide {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .slide img {
+          /* style for the image */
+        }
+
+        .slide p {
+          /* style for the text */
+        }
+      }
+    }
+  }
 }
