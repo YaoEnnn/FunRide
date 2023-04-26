@@ -1,0 +1,95 @@
+@import "../globalMixins.scss";
+
+.anime {
+    @keyframes animation_right {
+        from {
+            opacity: 0;
+            transform: translateX(-3em);
+            -webkit-transform: translateX(-3em);
+            -moz-transform: translateX(-3em);
+            -ms-transform: translateX(-3em);
+            -o-transform: translateX(-3em);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+            -webkit-transform: translateX(0);
+            -moz-transform: translateX(0);
+            -ms-transform: translateX(0);
+            -o-transform: translateX(0);
+        }
+    }
+    animation: animation_right 0.4s backwards;
+    -webkit-animation: animation_right 0.4s backwards;
+}
+
+.error {
+    @include shaking_label;
+
+    > input {
+        border: 2px solid red !important;
+    }
+    svg,
+    input {
+        color: red !important;
+    }
+}
+
+.i {
+    input,
+    svg {
+        color: var(--textcolor);
+    }
+
+    position: relative;
+
+    svg {
+        transition: all 0.2s ease-in;
+        -webkit-transition: all 0.2s ease-in;
+        -moz-transition: all 0.2s ease-in;
+        -ms-transition: all 0.2s ease-in;
+        -o-transition: all 0.2s ease-in;
+
+        &:active {
+            transform: scale(0.95);
+            -webkit-transform: scale(0.95);
+            -moz-transform: scale(0.95);
+            -ms-transform: scale(0.95);
+            -o-transform: scale(0.95);
+        }
+
+        cursor: pointer;
+        position: absolute;
+        right: 1em;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+    }
+
+    input {
+        background-color: transparent;
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        -ms-border-radius: 5px;
+        -o-border-radius: 5px;
+        transition: all 0.2s ease-in;
+        -webkit-transition: all 0.2s ease-in;
+        -moz-transition: all 0.2s ease-in;
+        -ms-transition: all 0.2s ease-in;
+        -o-transition: all 0.2s ease-in;
+
+        // border: 2px solid rgba(0, 0, 0, 0.219);
+
+        border: 2px solid var(--blurborder);
+
+        width: 100%;
+        font-size: 1em;
+        padding: 1em;
+        outline: none;
+
+        &:focus {
+            border: 2px solid var(--textcolor);
+        }
+    }
+}

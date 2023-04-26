@@ -1,0 +1,74 @@
+@import "normalize.css";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+
+@font-face {
+  font-family: MontserratMeidum;
+  src: url("../Components/fonts/Montserrat-Medium.ttf");
+}
+
+@font-face {
+  font-family: MontserratLight;
+  src: url("../Components/fonts/Montserrat-Light.ttf");
+}
+
+:root {
+  --Roboto: "Roboto", sans-serif;
+  width: 100%;
+  height: 100%;
+  --imgcolor: white;
+  --backgroundcolor: white;
+  --backgroundcolor2: #ad8dc7;
+  --textcolor: black;
+
+  --invertedtextcolor: white;
+  --primarycolor: #007bff;
+  --btncolor: #3c3c3c;
+  --inverted: invert(1);
+  --backward-invert: invert(0);
+  --blurborder: rgba(0, 0, 0, 0.219);
+  --secondarycolor: #007bff;
+  --secondarycolor2: #b44bd8;
+  --blurcolor2: #b54bd88e;
+  --homebackground: #5d5d74;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  text-decoration: none;
+}
+
+button,
+[tabindex] {
+  outline: none;
+  border: none;
+}
+a {
+  color: val(--textcolor);
+  text-decoration: none;
+}
+
+html {
+  font-size: 65%;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  font-family: var(--Roboto);
+  font-size: 1.6rem;
+  line-height: 1.5;
+  text-rendering: optimizeSpeed;
+  width: 100%;
+  height: 100%;
+  background-color: var(--backgroundcolor);
+}
