@@ -1,9 +1,10 @@
-from flask import jsonify, request
-from app import app
+from flask import jsonify, request, render_template
+from app import app, mail
 from model import Offer, db, Trip, Order, CarType, PrivateOrder, User, Session, Role
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 from datetime import datetime
+from flask_mail import Message
 from .booking import is_valid_email
 
 #show all discount
@@ -223,20 +224,43 @@ def delete_order(order_id):
         })
     
     order = Order.query.get(order_id)
+    #get data send email from admin or manager
+    data = request.json
+
     if order:
-        try:
-            db.session.delete(order)
-            db.session.commit()
-            return jsonify({
-                'status':'OK',
-                'msg':'Order Deleted'
-            })
-        except:
-            db.session.rollback()
-            return jsonify({
-                'status':'FAIL',
-                'err':'Could Not Delete Order'
-            })
+        # try:
+
+        if data and "send_mail" in data:
+            send_mail = data['send_mail']
+            seats = order.seat_ref
+            seat_booked = []
+            for seat in seats:
+                seat_booked.append(seat.seat_number)
+                
+        #send email to user if need
+        if send_mail == True:
+            msg = Message("Your Order Has Been Cancelled",
+            sender=app.config.get("MAIL_USERNAME"),
+            recipients=[order.email])
+            msg.html = render_template("cancel_order.html",
+            start = order.trip.start,
+            end = order.trip.end,
+            seat = seat_booked)
+            mail.send(msg)
+        
+        db.session.delete(order)
+        db.session.commit()
+
+        return jsonify({
+            'status':'OK',
+            'msg':'Order Deleted'
+        })
+        # except:
+        #     db.session.rollback()
+        #     return jsonify({
+        #         'status':'FAIL',
+        #         'err':'Could Not Delete Order'
+        #     })
     else:
         return jsonify({
             'status':'FAIL',
@@ -332,9 +356,25 @@ def delete_private_order(order_id):
             'err':'No Private Order Found'
         })
     
+    data = request.json
+    
     try:
+
+        if data and "send_mail" in data:
+            send_mail = data['send_mail']
+        #send email to user if need
+        if send_mail == True:
+            msg = Message("Your Private Order Has Been Cancelled",
+            sender=app.config.get("MAIL_USERNAME"),
+            recipients=[private_order.email])
+            msg.html = render_template("cancel_private_order.html",
+            start = private_order.start,
+            end = private_order.end)
+            mail.send(msg)
+        
         db.session.delete(private_order)
         db.session.commit()
+
         return jsonify({
             'status':'OK',
             'msg':'Private Order Deleted'

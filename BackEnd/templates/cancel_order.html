@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Order Cancelled Notification</title>
+	<style>
+		/* Reset CSS */
+		body {
+			margin: 0;
+			padding: 0;
+		}
+
+		/* Global styles */
+		.container {
+			margin: 0 auto;
+			max-width: 600px;
+			padding: 20px;
+			background-color: #f7f7f7;
+			font-family: Arial, sans-serif;
+			font-size: 16px;
+			line-height: 1.5;
+			color: #333;
+		}
+
+		/* Heading styles */
+		.heading {
+			margin-top: 0;
+			margin-bottom: 20px;
+			font-size: 24px;
+			font-weight: bold;
+			text-align: center;
+			color: #333;
+		}
+
+		/* Body styles */
+		.body {
+			margin-bottom: 20px;
+			padding: 20px;
+			background-color: #fff;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+		}
+
+		.body p {
+			margin-top: 0;
+			margin-bottom: 1em;
+		}
+
+		/* Footer styles */
+		.footer {
+			margin-top: 20px;
+			padding: 20px;
+			background-color: #f7f7f7;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			font-size: 14px;
+			line-height: 1.5;
+			color: #666;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1 class="heading">FUNRIDE</h1>
+		<div class="body">
+			<p>Your Order from {{start}} to {{end}} with Seats {{seat}} Has Been Cancelled!</p>
+		</div>
+		<div class="footer">
+			<p>If you have any questions or concerns, please contact us at:</p>
+			<p>Phone: {{phone}}</p>
+			<p>Address: {{address}}</p>
+		</div>
+	</div>
+</body>
+</html>
