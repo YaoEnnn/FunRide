@@ -2,15 +2,25 @@
 @import "../../globalMixins.scss";
 .base {
   background-color: white;
-  .mainInput{
-    display: flex;
-    gap:1em;
+  .searchBar {
+    padding: 5em;
 
-    .customInput{
-      background-color: black;
-      color: red;
-      font-size: 80em;
-      height: 50em;
+    > h1 {
+      @include boldfont;
+      font-size: 2.5em;
     }
+
+    .mainInput {
+      display: flex;
+      gap: 1em;
+      align-items: center;
+
+      > button {
+        vertical-align: middle;
+        @include btn;
+      }
+    }
+  }
+  .listView {
   }
 }

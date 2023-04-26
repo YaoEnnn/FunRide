@@ -1,0 +1,171 @@
+@import "../globalMixins.scss";
+
+.selected {
+  background-color: var(--secondarycolor);
+  @include SlightRoundBorder;
+  color: var(--backgroundcolor);
+}
+
+.dropdown div.opened {
+  color: var(--backgroundcolor);
+
+  border: 2px solid var(--secondarycolor);
+  background-color: var(--secondarycolor);
+
+  &:hover {
+    border: 2px solid var(--secondarycolor);
+  }
+
+  svg {
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+  }
+
+  label,
+  svg {
+    opacity: 1;
+  }
+}
+
+.loader {
+  @include loading_circle;
+  border-color: white;
+  border-width: 2px;
+  border-right: 2px solid transparent;
+  border-left: 2px solid transparent;
+  height: 1em;
+  width: 1em;
+  position: absolute;
+  right: 1em;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  width: auto !important;
+
+  label {
+    user-select: none;
+  }
+
+  > div {
+    @include SlightRoundBorder;
+    @include boldfont;
+    @include transition;
+    margin-bottom: 0.5em !important;
+    border: 2px solid var(--blurborder);
+    padding: 0.7em;
+    font-size: 0.8em;
+    cursor: pointer;
+    background-color: transparent;
+    position: relative;
+    display: inline-flex;
+    width: auto !important;
+    max-width: 20em;
+    overflow: hidden;
+    text-align: center;
+    padding-right: 3em;
+    color: var(--textcolor);
+
+    &:hover {
+      label,
+      svg {
+        opacity: 1;
+      }
+
+      border: 2px solid var(--textcolor);
+    }
+
+    * {
+      cursor: pointer;
+    }
+
+    label {
+      margin: auto;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: inline-block;
+    }
+
+    label,
+    svg {
+      @include transition;
+      opacity: 0.4;
+    }
+
+    svg {
+      height: 0.8em;
+      position: absolute;
+      right: 1em;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+    }
+  }
+
+  section {
+    @include SlightRoundBorder();
+    @include lightfont();
+    @include dropdown_animation();
+    font-size: 0.8em;
+    overflow-y: auto;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5em;
+    padding: 0.5em;
+    overflow-x: hidden;
+    color: white;
+    background-color: #3c3c3c;
+    box-shadow: 0 0 5px black;
+    position: absolute;
+    z-index: 100;
+    max-width: 20em;
+    max-height: 20em;
+
+    label {
+      cursor: pointer;
+      @include transition;
+      width: 100%;
+      // Avoiding when the text is too long here
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      height: 3.5em;
+      display: inline-block;
+      padding: 1em;
+      position: relative;
+      padding-right: 3.5em;
+
+      svg {
+        @include rotate_anime;
+        position: absolute;
+        right: 1em;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+      }
+    }
+
+    label:not(.selected):active {
+      transform: scale(0.9);
+      -webkit-transform: scale(0.9);
+      -moz-transform: scale(0.9);
+      -ms-transform: scale(0.9);
+      -o-transform: scale(0.9);
+    }
+
+    label:not(.selected):hover {
+      @include SlightRoundBorder;
+      color: black;
+      background-color: rgba(0, 0, 0, 0.219);
+      filter: invert(1);
+      -webkit-filter: invert(1);
+    }
+  }
+}

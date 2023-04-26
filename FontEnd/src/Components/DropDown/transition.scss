@@ -1,0 +1,25 @@
+@import "../globalMixins.scss";
+
+.dropdown-exit {
+  transform: translateY(0);
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+
+  opacity: 1;
+}
+
+.dropdown-exit-active {
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+  transform: translateY(-3em);
+  -webkit-transform: translateY(-3em);
+  -moz-transform: translateY(-3em);
+  -ms-transform: translateY(-3em);
+  -o-transform: translateY(-3em);
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+}

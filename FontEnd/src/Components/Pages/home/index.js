@@ -1,7 +1,6 @@
 import styles from "./style.module.scss";
 import AnimatedOutlet from "../../AnimatedOutlet";
 import React, { Component } from "react";
-import Carousel
 
 function Home() {
   return (
