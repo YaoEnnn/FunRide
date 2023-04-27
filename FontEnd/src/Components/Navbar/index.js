@@ -20,10 +20,22 @@ function Navbar() {
             <NavLink to="/news">News</NavLink>
           </li>
           <li>
-            <NavLink to="/trips">Trips</NavLink>
+            <NavLink to="/trips">Trip's Info</NavLink>
           </li>
           <li>
             <NavLink to="/contact">Contact</NavLink>
+          </li>
+          <li>
+            <NavLink to="/Discountcode">Discount</NavLink>
+          </li>
+          <li>
+            <NavLink to="/Admin">Admin</NavLink>
+          </li>
+          <li>
+            <NavLink to="/setting">Setting</NavLink>
+          </li>
+          <li>
+            <NavLink to="/Logout">Logout</NavLink>
           </li>
         </ul>
       </nav>

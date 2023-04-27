@@ -1,0 +1,11 @@
+@import "../../globalMixins.scss";
+@import "../../globalStyle.scss";
+
+.base {
+  padding: 3em;
+  > div {
+    > button {
+      @include btn;
+    }
+  }
+}

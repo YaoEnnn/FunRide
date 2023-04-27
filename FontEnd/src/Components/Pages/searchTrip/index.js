@@ -11,6 +11,7 @@ function SearchTrip() {
   const [value, setvalue] = useState(null);
   const [end, setEnd] = useState("");
   const [trip, setTrip] = useState([]);
+  const [booking, setBooking] = useState([]);
 
   const endArray = [
     "Unknown",
@@ -19,6 +20,7 @@ function SearchTrip() {
     "Bao Loc City",
     "VungTau City",
   ];
+  const carType = [];
 
   const handleEndChange = (event) => {
     setEnd(event.target.value);
@@ -83,16 +85,42 @@ function SearchTrip() {
               return (
                 <div className={styles.doc} key={e.id}>
                   <div>
-                    <img src="https://img1.oto.com.vn/2023/03/20/20230320105242-d942_wm.jpg "></img>
+                    {e.car_type === "Limousine" && (
+                      <img src="https://vielimousine.com/wp-content/uploads/2021/12/DSC6090.jpg"></img>
+                    )}
+                    {e.car_type === "Bus" && (
+                      <img src="https://motortrip.vn/wp-content/uploads/2021/07/xe-khach-ha-noi-da-nang-3.jpg"></img>
+                    )}
+                    {e.car_type === "Sleeper-Bus" && (
+                      <img src="https://saigonstartravel.com/wp-content/uploads/2018/09/cho-thue-xe-giuong-nam-cao-cap.jpg"></img>
+                    )}
+
+                    <div>
+                      <div>
+                        <label>Trip of: {e.departure_day}</label>
+                      </div>
+                      <div>
+                        <label>Time: </label>
+                        <label>{e.departure_time}</label>
+                        <label> ---- </label>
+                        <label>{e.arrived_time}</label>
+                      </div>
+                      <div>
+                        <label>{e.car_type}</label>
+                      </div>
+                      <div>
+                        <label>From {e.start} </label>
+                        <label>----- </label>
+                        <label>{e.end}</label>
+                      </div>
+                    </div>
+                    <div>
+                      <div>
+                        <label>Price: {e.price} vnđ</label>
+                      </div>
+                      <button>Confirm</button>
+                    </div>
                   </div>
-                  <label>{e.id}</label>
-                  <label>{e.start}</label>
-                  <label>{e.end}</label>
-                  <label>{e.departure_time}</label>
-                  <label>{e.arrived_time}</label>
-                  <label>{e.price}</label>
-                  <label>{e.departure_day}</label>
-                  <label>{e.car_id}</label>
                 </div>
               );
             })}

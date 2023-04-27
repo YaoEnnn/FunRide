@@ -32,23 +32,36 @@
   }
   .cardview {
     border-top: 1px black;
-    background-color: aqua;
-    width: 80%;
+    width: 100%;
     height: 50em;
     display: flex;
-    gap: 2px;
+    gap: 5px;
     flex-direction: column;
 
     .doc {
       width: 50em;
       height: 30em;
       background-color: white;
-      border: 1px solid;
+      margin: auto;
+      border: 0.5px solid rgba(0, 0, 0, 0.219);
 
       > div {
         display: flex;
+        > div {
+          padding: 1em;
+          > button {
+            @include btn;
+          }
+          > div {
+            align-items: center;
+            justify-content: center;
+            > label {
+              @include boldfont;
+            }
+          }
+        }
         > img {
-          width: 5em;
+          width: 10em;
         }
       }
     }
