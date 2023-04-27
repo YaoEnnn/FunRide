@@ -80,7 +80,21 @@ function SearchTrip() {
           </section>
           <section className={styles.cardview}>
             {trip.map((e) => {
-              return <div className={styles.doc}></div>;
+              return (
+                <div className={styles.doc} key={e.id}>
+                  <div>
+                    <img src="https://img1.oto.com.vn/2023/03/20/20230320105242-d942_wm.jpg "></img>
+                  </div>
+                  <label>{e.id}</label>
+                  <label>{e.start}</label>
+                  <label>{e.end}</label>
+                  <label>{e.departure_time}</label>
+                  <label>{e.arrived_time}</label>
+                  <label>{e.price}</label>
+                  <label>{e.departure_day}</label>
+                  <label>{e.car_id}</label>
+                </div>
+              );
             })}
           </section>
         </div>
