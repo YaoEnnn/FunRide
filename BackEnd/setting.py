@@ -13,6 +13,8 @@ TOKEN_EXPIRY: int = 15
 # Time for Expiry of Token Change Password
 RECOVERY_TOKEN_EXPIRY: int = 15
 
+MAX_TRIP_PER_PAGE = 10
+
 #Config company mail
 MAIL_SETTING = {
     "MAIL_SERVER": 'smtp.gmail.com',

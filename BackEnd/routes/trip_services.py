@@ -2,6 +2,7 @@ from app import app
 from flask import request, jsonify
 from model import Trip
 from datetime import datetime, timedelta
+from setting import MAX_TRIP_PER_PAGE
 
 @app.route('/trip/search', methods = ['GET', 'POST'])
 def search_trip():

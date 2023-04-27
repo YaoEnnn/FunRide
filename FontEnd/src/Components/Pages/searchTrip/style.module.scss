@@ -36,13 +36,21 @@
     width: 80%;
     height: 50em;
     display: flex;
+    gap: 2px;
     flex-direction: column;
 
     .doc {
       width: 50em;
       height: 30em;
       background-color: white;
-      border: 2px dotted;
+      border: 1px solid;
+
+      > div {
+        display: flex;
+        > img {
+          width: 5em;
+        }
+      }
     }
   }
 }
