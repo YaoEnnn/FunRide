@@ -10,6 +10,7 @@ function SearchTrip() {
   const [date, setDate] = useState();
   const [value, setvalue] = useState(null);
   const [end, setEnd] = useState("");
+  const [trip, setTrip] = useState([]);
 
   const endArray = [
     "Unknown",
@@ -25,9 +26,8 @@ function SearchTrip() {
 
   useEffect(() => {
     axios.post("trip/display-all").then((resp) => {
-      const temp = [];
-      const data = resp.data.msg;
       console.log(resp.data.msg);
+      setTrip(resp.data.msg);
     });
   }, []);
 
@@ -73,7 +73,17 @@ function SearchTrip() {
             </button>
           </section>
         </div>
-        <div className={styles.listView}></div>
+        <div className={styles.listView}>
+          <section className={styles.sort}>
+            <h1>--Sorting--</h1>
+            <select></select>
+          </section>
+          <section className={styles.cardview}>
+            {trip.map((e) => {
+              return <div className={styles.doc}></div>;
+            })}
+          </section>
+        </div>
       </div>
     </AnimatedOutlet>
   );
