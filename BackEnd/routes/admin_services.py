@@ -704,7 +704,7 @@ def change_password():
         'msg':'Password Changed'
     })
 
-def check_login():
+def     check_login():
     #get token from FrontEnd
     token = request.headers.get("Authorization")
 
