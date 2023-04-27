@@ -22,5 +22,27 @@
     }
   }
   .listView {
+    padding: 5em;
+    .sort {
+      > h1 {
+        @include boldfont;
+        font-size: 2.5em;
+      }
+    }
+  }
+  .cardview {
+    border-top: 1px black;
+    background-color: aqua;
+    width: 80%;
+    height: 50em;
+    display: flex;
+    flex-direction: column;
+
+    .doc {
+      width: 50em;
+      height: 30em;
+      background-color: white;
+      border: 2px dotted;
+    }
   }
 }
