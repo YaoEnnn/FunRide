@@ -1,0 +1,30 @@
+@import "../../../globalStyle.scss";
+@import "../../../globalMixins.scss";
+
+.base {
+  padding: 3em;
+  .header {
+    > h1 {
+      @include boldfont;
+    }
+  }
+  .addnew {
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    > label {
+      @include lightfont;
+      font-size: 1.2em;
+    }
+    > button {
+      margin-top: 3em;
+      padding-block: 1.5em;
+      font-size: 1em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      @include btn;
+    }
+  }
+}

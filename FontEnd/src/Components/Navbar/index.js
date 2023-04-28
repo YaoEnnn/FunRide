@@ -6,7 +6,6 @@ import { useContext } from "react";
 
 function Navbar() {
   const isBigRole = useContext(loginContext);
-  const [toggleState, setToggleState] = useState(true);
   return (
     <div className={styles.base}>
       <nav>

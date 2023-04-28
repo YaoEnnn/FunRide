@@ -1,2 +1,46 @@
 @import "../../globalStyle.scss";
 @import "../../globalMixins.scss";
+
+.base {
+  padding: 3em;
+  .header {
+    display: flex;
+
+    > h1 {
+      position: absolute;
+      left: 0;
+      margin-left: 20vh;
+      @include boldfont;
+    }
+    > button {
+      @include btn;
+      position: absolute;
+      right: 0;
+      margin-right: 20vh;
+    }
+  }
+  .table {
+    > div {
+      margin-top: 5em;
+      @include table_style_vertical;
+      > div:nth-child(2) {
+        > div {
+          > svg {
+            font-size: 20px;
+            padding-inline: 3px;
+            cursor: pointer;
+            color: var(--textcolor);
+            padding: 5px;
+            @include transition;
+
+            &:hover {
+              @include SquareRoundBorder;
+              background-color: var(--backgroundcolor);
+              filter: invert(1);
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -442,7 +442,7 @@
   overflow: hidden;
   border: 2px solid var(--blurborder);
   position: absolute;
-  width: 45em;
+  width: 60em;
   height: 45em;
   left: 50%;
   transform: translate(-50%);
@@ -465,7 +465,7 @@
       }
 
       > :nth-child(1) {
-        padding-left: 1.5em;
+        padding-left: 1em;
       }
     }
   }

@@ -12,6 +12,7 @@ const Admin = () => {
   const [showPopUp, setShowPopUp] = useState(false);
   const navigate = useNavigate();
   const [currentAdmin, setCurrentAdmin] = useState(null);
+  const [count, setCount] = useState(0);
   const handleButtonClick = () => {
     setShowPopUp(true);
   };
@@ -20,8 +21,10 @@ const Admin = () => {
   };
   const confbutton = (a) => {
     axios.delete(`manager/delete-admin/${a.id}`).then((resp) => {
+      console.log(resp.data);
       if (resp.data.status === "OK") {
         success("Successfully deleted user");
+        setCount(count + 1);
       }
     });
     setShowPopUp(false);
@@ -62,15 +65,16 @@ const Admin = () => {
               </div>
             </div>
             <div>
-              {showAdmin.map((e) => {
+              {showAdmin.map((e, i) => {
                 return (
-                  <div className={styles.doc} key={e.id}>
+                  <div key={i}>
                     <label>{e.name}</label>
                     <label>{e.email}</label>
                     <label
                       onClick={() => {
-                        setShowPopUp(true);
                         setCurrentAdmin(e);
+                        setShowPopUp(true);
+                        console.log(e);
                       }}
                     >
                       Delete
