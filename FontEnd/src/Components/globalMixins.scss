@@ -1,579 +1,580 @@
 @mixin gradientBackground {
-    background: #83a4d4;
-    /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #b6fbff, #83a4d4);
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #b6fbff, #83a4d4);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #83a4d4;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #b6fbff, #83a4d4);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #b6fbff, #83a4d4);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 @mixin backbtn {
-    @include RoundBorder;
-    @include transition;
-    color: var(--textcolor);
-    background-color: var(--backgroundcolor);
-    width: 2em;
-    height: 2em;
-    display: flex;
-    justify-content: center;
+  @include RoundBorder;
+  @include transition;
+  color: var(--textcolor);
+  background-color: var(--backgroundcolor);
+  width: 2em;
+  height: 2em;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+
+  svg {
     cursor: pointer;
+    margin: auto;
+  }
 
-    svg {
-        cursor: pointer;
-        margin: auto;
-    }
-
-    &:hover {
-        filter: invert(1);
-    }
+  &:hover {
+    filter: invert(1);
+  }
 }
 
 @mixin RoundBorder {
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
 }
 
 @mixin SlightRoundBorder {
-    border-radius: 15px;
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
-    -ms-border-radius: 15px;
-    -o-border-radius: 15px;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
 }
 
 @mixin SquareRoundBorder {
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
 }
 
 @mixin transition {
-    transition: all 0.2s ease-in;
-    -webkit-transition: all 0.2s ease-in;
-    -moz-transition: all 0.2s ease-in;
-    -ms-transition: all 0.2s ease-in;
-    -o-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  -ms-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
 }
 
 @mixin transition_01s {
-    transition: all 0.1s ease-in-out;
-    -webkit-transition: all 0.1s ease-in-out;
-    -moz-transition: all 0.1s ease-in-out;
-    -ms-transition: all 0.1s ease-in-out;
-    -o-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
 }
 
 @mixin lightfont {
-    font-family: MontserratLight;
+  font-family: MontserratLight;
 }
 
 @mixin boldfont {
-    font-family: MontserratMeidum;
+  font-family: MontserratMeidum;
 }
 
 @mixin dropdown_animation {
-    @keyframes animation_down {
-        from {
-            transform: translateY(-3em);
-            opacity: 0;
-            -webkit-transform: translateY(-3em);
-            -moz-transform: translateY(-3em);
-            -ms-transform: translateY(-3em);
-            -o-transform: translateY(-3em);
-        }
-
-        to {
-            transform: translateY(0);
-            opacity: 1;
-            -webkit-transform: translateY(0);
-            -moz-transform: translateY(0);
-            -ms-transform: translateY(0);
-            -o-transform: translateY(0);
-        }
+  @keyframes animation_down {
+    from {
+      transform: translateY(-3em);
+      opacity: 0;
+      -webkit-transform: translateY(-3em);
+      -moz-transform: translateY(-3em);
+      -ms-transform: translateY(-3em);
+      -o-transform: translateY(-3em);
     }
 
-    animation: animation_down 0.4s backwards;
-    -webkit-animation: animation_down 0.4s backwards;
+    to {
+      transform: translateY(0);
+      opacity: 1;
+      -webkit-transform: translateY(0);
+      -moz-transform: translateY(0);
+      -ms-transform: translateY(0);
+      -o-transform: translateY(0);
+    }
+  }
+
+  animation: animation_down 0.4s backwards;
+  -webkit-animation: animation_down 0.4s backwards;
 }
 
 @mixin dropup_animation {
-    @keyframes animation_up {
-        from {
-            transform: translateY(3em);
-            opacity: 0;
-            -webkit-transform: translateY(3em);
-            -moz-transform: translateY(3em);
-            -ms-transform: translateY(3em);
-            -o-transform: translateY(3em);
-        }
-
-        to {
-            transform: translateY(0);
-            opacity: 1;
-            -webkit-transform: translateY(0);
-            -moz-transform: translateY(0);
-            -ms-transform: translateY(0);
-            -o-transform: translateY(0);
-        }
+  @keyframes animation_up {
+    from {
+      transform: translateY(3em);
+      opacity: 0;
+      -webkit-transform: translateY(3em);
+      -moz-transform: translateY(3em);
+      -ms-transform: translateY(3em);
+      -o-transform: translateY(3em);
     }
 
-    animation: animation_up 0.4s backwards;
-    -webkit-animation: animation_up 0.4s backwards;
+    to {
+      transform: translateY(0);
+      opacity: 1;
+      -webkit-transform: translateY(0);
+      -moz-transform: translateY(0);
+      -ms-transform: translateY(0);
+      -o-transform: translateY(0);
+    }
+  }
+
+  animation: animation_up 0.4s backwards;
+  -webkit-animation: animation_up 0.4s backwards;
 }
 
 @mixin slide_left_animation {
-    @keyframes animation_left {
-        from {
-            opacity: 0;
-            transform: translateX(3em);
-            -webkit-transform: translateX(3em);
-            -moz-transform: translateX(3em);
-            -ms-transform: translateX(3em);
-            -o-transform: translateX(3em);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateX(0);
-            -webkit-transform: translateX(0);
-            -moz-transform: translateX(0);
-            -ms-transform: translateX(0);
-            -o-transform: translateX(0);
-        }
+  @keyframes animation_left {
+    from {
+      opacity: 0;
+      transform: translateX(3em);
+      -webkit-transform: translateX(3em);
+      -moz-transform: translateX(3em);
+      -ms-transform: translateX(3em);
+      -o-transform: translateX(3em);
     }
 
-    animation: animation_left 0.4s backwards;
-    -webkit-animation: animation_left 0.4s backwards;
+    to {
+      opacity: 1;
+      transform: translateX(0);
+      -webkit-transform: translateX(0);
+      -moz-transform: translateX(0);
+      -ms-transform: translateX(0);
+      -o-transform: translateX(0);
+    }
+  }
+
+  animation: animation_left 0.4s backwards;
+  -webkit-animation: animation_left 0.4s backwards;
 }
 
 @mixin slide_right_animation {
-    @keyframes animation_right {
-        from {
-            opacity: 0;
-            transform: translateX(-3em);
-            -webkit-transform: translateX(-3em);
-            -moz-transform: translateX(-3em);
-            -ms-transform: translateX(-3em);
-            -o-transform: translateX(-3em);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateX(0);
-            -webkit-transform: translateX(0);
-            -moz-transform: translateX(0);
-            -ms-transform: translateX(0);
-            -o-transform: translateX(0);
-        }
+  @keyframes animation_right {
+    from {
+      opacity: 0;
+      transform: translateX(-3em);
+      -webkit-transform: translateX(-3em);
+      -moz-transform: translateX(-3em);
+      -ms-transform: translateX(-3em);
+      -o-transform: translateX(-3em);
     }
 
-    animation: animation_right 0.4s backwards;
-    -webkit-animation: animation_right 0.4s backwards;
+    to {
+      opacity: 1;
+      transform: translateX(0);
+      -webkit-transform: translateX(0);
+      -moz-transform: translateX(0);
+      -ms-transform: translateX(0);
+      -o-transform: translateX(0);
+    }
+  }
+
+  animation: animation_right 0.4s backwards;
+  -webkit-animation: animation_right 0.4s backwards;
 }
 
 @mixin shaking_label {
-    @keyframes shake_error_msg {
-        0% {
-            transform: translateX(10px);
-            opacity: 0;
-        }
-
-        25% {
-            transform: translate(-10px);
-        }
-
-        50% {
-            transform: translate(10px);
-            opacity: 1;
-        }
-
-        75% {
-            transform: translateX(-10px);
-        }
-
-        100% {
-            transform: translateX(0);
-        }
+  @keyframes shake_error_msg {
+    0% {
+      transform: translateX(10px);
+      opacity: 0;
     }
 
-    animation: shake_error_msg 0.3s forwards;
-    -webkit-animation: shake_error_msg 0.3s forwards;
+    25% {
+      transform: translate(-10px);
+    }
+
+    50% {
+      transform: translate(10px);
+      opacity: 1;
+    }
+
+    75% {
+      transform: translateX(-10px);
+    }
+
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  animation: shake_error_msg 0.3s forwards;
+  -webkit-animation: shake_error_msg 0.3s forwards;
 }
 
 @mixin rotate_anime {
-    @keyframes rotateme {
-        from {
-            opacity: 0;
-            transform: rotate(90deg);
-            -webkit-transform: rotate(90deg);
-            -moz-transform: rotate(90deg);
-            -ms-transform: rotate(90deg);
-            -o-transform: rotate(90deg);
-        }
-
-        to {
-            opacity: 1;
-            transform: rotate(360deg);
-            -webkit-transform: rotate(360deg);
-            -moz-transform: rotate(360deg);
-            -ms-transform: rotate(360deg);
-            -o-transform: rotate(360deg);
-        }
+  @keyframes rotateme {
+    from {
+      opacity: 0;
+      transform: rotate(90deg);
+      -webkit-transform: rotate(90deg);
+      -moz-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      -o-transform: rotate(90deg);
     }
 
-    animation: rotateme 0.5s backwards;
-    -webkit-animation: rotateme 0.5s backwards;
+    to {
+      opacity: 1;
+      transform: rotate(360deg);
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+    }
+  }
+
+  animation: rotateme 0.5s backwards;
+  -webkit-animation: rotateme 0.5s backwards;
 }
 
 @mixin loading_circle {
-    @keyframes loading {
-        from {
-            transform: rotate(0deg);
-        }
-
-        to {
-            transform: rotate(360deg);
-        }
+  @keyframes loading {
+    from {
+      transform: rotate(0deg);
     }
 
-    width: 2em;
-    height: 2em;
-    border-radius: 50%;
-    border: 3px solid var(--textcolor);
-    border-right: 3px solid transparent;
-    border-left: 3px solid transparent;
-    animation: loading 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite;
-    -webkit-animation: loading 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite;
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  border: 3px solid var(--textcolor);
+  border-right: 3px solid transparent;
+  border-left: 3px solid transparent;
+  animation: loading 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite;
+  -webkit-animation: loading 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    infinite;
 }
 
 @mixin btn {
-    @include lightfont();
-    @include SquareRoundBorder();
-    @include transition();
-    height: 3em;
-    width: auto;
-    color: var(--invertedtextcolor);
-    padding-right: 1em;
-    padding-left: 1em;
-    // box-shadow: 0 0 5px rgba(0, 0, 0, 0.493);
-    cursor: pointer;
-    background-color: var(--btncolor);
-    // filter: var(--inverted);
-    // -webkit-filter: var(--inverted);
+  @include lightfont();
+  @include SquareRoundBorder();
+  @include transition();
+  height: 3em;
+  width: auto;
+  color: var(--invertedtextcolor);
+  padding-right: 1em;
+  padding-left: 1em;
+  // box-shadow: 0 0 5px rgba(0, 0, 0, 0.493);
+  cursor: pointer;
+  background-color: var(--btncolor);
+  // filter: var(--inverted);
+  // -webkit-filter: var(--inverted);
 
-    &:hover {
-        @include boldfont;
-        transform: scale(1.01);
-        -webkit-transform: scale(1.01);
-        -moz-transform: scale(1.01);
-        -ms-transform: scale(1.01);
-        -o-transform: scale(1.01);
-        -webkit-transform: scale(1.01);
-        background-color: crimson;
-        color: white;
-    }
+  &:hover {
+    @include boldfont;
+    transform: scale(1.01);
+    -webkit-transform: scale(1.01);
+    -moz-transform: scale(1.01);
+    -ms-transform: scale(1.01);
+    -o-transform: scale(1.01);
+    -webkit-transform: scale(1.01);
+    background-color: crimson;
+    color: white;
+  }
 
-    &:active {
-        transform: scale(0.99);
-        -webkit-transform: scale(0.99);
-        -moz-transform: scale(0.99);
-        -ms-transform: scale(0.99);
-        -o-transform: scale(0.99);
-    }
+  &:active {
+    transform: scale(0.99);
+    -webkit-transform: scale(0.99);
+    -moz-transform: scale(0.99);
+    -ms-transform: scale(0.99);
+    -o-transform: scale(0.99);
+  }
 }
 
 @mixin table_style {
-    @include SlightRoundBorder;
-    overflow: hidden;
-    border: 2px solid var(--blurborder);
+  @include SlightRoundBorder;
+  overflow: hidden;
+  border: 2px solid var(--blurborder);
 
-    height: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  > div {
+    padding: 1em;
+    padding-top: 2em;
+    padding-bottom: 2em;
     display: flex;
     flex-direction: column;
+    gap: 1em;
+    overflow-x: hidden;
 
     > div {
-        padding: 1em;
-        padding-top: 2em;
-        padding-bottom: 2em;
-        display: flex;
-        flex-direction: column;
-        gap: 1em;
-        overflow-x: hidden;
+      > * {
+        flex: 1;
+      }
 
-        > div {
-            > * {
-                flex: 1;
-            }
-
-            > :nth-child(1) {
-                padding-left: 1.5em;
-            }
-        }
+      > :nth-child(1) {
+        padding-left: 1.5em;
+      }
     }
+  }
 
-    label {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
+  label {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  > div:nth-child(1) {
+    @include boldfont;
+    padding-top: 0;
+    padding-bottom: 0;
+    color: var(--textcolor);
+    box-shadow: 0 0 5px black;
+    z-index: 1;
+
+    > div {
+      @include boldfont;
+      font-size: 1em;
+      @include SlightRoundBorder;
+      background-color: var(--backgroundcolor);
+      // box-shadow: 0 0 5px rgba(0, 0, 0, 0.438);
+      color: var(--textcolor);
+      padding: 1em;
+      display: flex;
+      justify-content: space-around;
     }
+  }
 
-    > div:nth-child(1) {
-        @include boldfont;
-        padding-top: 0;
-        padding-bottom: 0;
-        color: var(--textcolor);
-        box-shadow: 0 0 5px black;
-        z-index: 1;
+  > div:nth-child(2) {
+    overflow-y: auto;
 
-        > div {
-            @include boldfont;
-            font-size: 1em;
-            @include SlightRoundBorder;
-            background-color: var(--backgroundcolor);
-            // box-shadow: 0 0 5px rgba(0, 0, 0, 0.438);
-            color: var(--textcolor);
-            padding: 1em;
-            display: flex;
-            justify-content: space-around;
-        }
+    > div {
+      @include lightfont;
+      font-size: 1em;
+      @include SlightRoundBorder;
+      background-color: var(--backgroundcolor);
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.438);
+      color: var(--textcolor);
+      padding: 1em;
+      display: flex;
+      justify-content: space-around;
     }
-
-    > div:nth-child(2) {
-        overflow-y: auto;
-
-        > div {
-            @include lightfont;
-            font-size: 1em;
-            @include SlightRoundBorder;
-            background-color: var(--backgroundcolor);
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.438);
-            color: var(--textcolor);
-            padding: 1em;
-            display: flex;
-            justify-content: space-around;
-        }
-    }
+  }
 }
 
 @mixin responsive_table {
-    border-radius: 0;
+  border-radius: 0;
 
-    > div:nth-child(1) > div {
-        overflow: hidden;
+  > div:nth-child(1) > div {
+    overflow: hidden;
 
-        * {
-            padding: 0;
-        }
+    * {
+      padding: 0;
+    }
+  }
+
+  > div > div {
+    flex-direction: column;
+    justify-content: center;
+
+    > :nth-child(1) {
+      padding: 0;
     }
 
-    > div > div {
-        flex-direction: column;
-        justify-content: center;
-
-        > :nth-child(1) {
-            padding: 0;
-        }
-
-        * {
-            padding: 0;
-            text-align: center;
-            margin: auto;
-        }
+    * {
+      padding: 0;
+      text-align: center;
+      margin: auto;
     }
+  }
 }
 
 @mixin hover_underly {
-    @include transition;
+  @include transition;
+  margin: auto;
+  opacity: 0.5;
+  position: relative;
+  padding-bottom: 4px;
+
+  &::after {
+    content: "";
+    width: 0;
+    height: 2px;
+    position: absolute;
+    border-radius: 10px;
+    bottom: 0;
     margin: auto;
-    opacity: 0.5;
-    position: relative;
-    padding-bottom: 4px;
+    right: 0;
+    left: 0;
+    transition: all 300ms ease;
+  }
+
+  &:hover {
+    color: #007bff;
+    opacity: 1;
 
     &::after {
-        content: '';
-        width: 0;
-        height: 2px;
-        position: absolute;
-        border-radius: 10px;
-        bottom: 0;
-        margin: auto;
-        right: 0;
-        left: 0;
-        transition: all 300ms ease;
+      background-color: #007bff;
+      width: 100%;
     }
-
-    &:hover {
-        color: #007bff;
-        opacity: 1;
-
-        &::after {
-            background-color: #007bff;
-            width: 100%;
-        }
-    }
+  }
 }
 
 @mixin responsive_content {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    height: calc(100% - 66.531px);
-    width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: calc(100% - 66.531px);
+  width: 100%;
 }
 
 @mixin waiting_circle {
-    @include loading_circle;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
+  @include loading_circle;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
 @mixin table_style_vertical {
-    @include SlightRoundBorder;
-    overflow: hidden;
-    border: 2px solid var(--blurborder);
-    position: absolute;
-    width: 45em;
-    height: 45em;
-    left: 50%;
-    transform: translate(-50%);
+  @include SlightRoundBorder;
+  overflow: hidden;
+  border: 2px solid var(--blurborder);
+  position: absolute;
+  width: 45em;
+  height: 45em;
+  left: 50%;
+  transform: translate(-50%);
 
+  display: flex;
+  flex-direction: column;
+
+  > div {
+    padding: 1em;
+    padding-top: 2em;
+    padding-bottom: 2em;
     display: flex;
     flex-direction: column;
+    gap: 1em;
+    overflow-x: hidden;
 
     > div {
-        padding: 1em;
-        padding-top: 2em;
-        padding-bottom: 2em;
-        display: flex;
-        flex-direction: column;
-        gap: 1em;
-        overflow-x: hidden;
+      > * {
+        flex: 1;
+      }
 
-        > div {
-            > * {
-                flex: 1;
-            }
-
-            > :nth-child(1) {
-                padding-left: 1.5em;
-            }
-        }
+      > :nth-child(1) {
+        padding-left: 1.5em;
+      }
     }
+  }
 
-    label {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-    }
+  label {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
 
-    > div:nth-child(1) {
-        @include boldfont;
-        padding-top: 0;
-        padding-bottom: 0;
+  > div:nth-child(1) {
+    @include boldfont;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: var(--backgroundcolor2);
+    color: var(--textcolor);
+    box-shadow: 0 0 5px black;
+    z-index: 1;
+
+    > div {
+      @include boldfont;
+      font-size: 1.4em;
+      text-align: center;
+      @include SlightRoundBorder;
+      background-color: var(--backgroundcolor2);
+      // box-shadow: 0 0 5px rgba(0, 0, 0, 0.438);
+      color: var(--textcolor);
+      padding: 1em;
+      display: flex;
+      justify-content: space-around;
+
+      > label {
         background-color: var(--backgroundcolor2);
-        color: var(--textcolor);
-        box-shadow: 0 0 5px black;
-        z-index: 1;
-
-        > div {
-            @include boldfont;
-            font-size: 1.4em;
-            text-align: center;
-            @include SlightRoundBorder;
-            background-color: var(--backgroundcolor2);
-            // box-shadow: 0 0 5px rgba(0, 0, 0, 0.438);
-            color: var(--textcolor);
-            padding: 1em;
-            display: flex;
-            justify-content: space-around;
-
-            > label {
-                background-color: var(--backgroundcolor2);
-            }
-        }
+      }
     }
+  }
 
-    > div:nth-child(2) {
-        overflow-y: auto;
+  > div:nth-child(2) {
+    overflow-y: auto;
 
-        > div {
-            @include lightfont;
-            font-size: 1.2em;
-            @include SquareRoundBorder();
-            background-color: var(--backgroundcolor);
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.438);
-            color: var(--textcolor);
-            padding: 1em;
-            display: flex;
-            text-align: center;
-            justify-content: space-around;
-        }
+    > div {
+      @include lightfont;
+      font-size: 1.2em;
+      @include SquareRoundBorder();
+      background-color: var(--backgroundcolor);
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.438);
+      color: var(--textcolor);
+      padding: 1em;
+      display: flex;
+      text-align: center;
+      justify-content: space-around;
     }
+  }
 }
 
 @mixin responsive_table_vertical_400px {
-    border-radius: 0;
-    width: unset;
-    height: unset;
+  border-radius: 0;
+  width: unset;
+  height: unset;
 
-    > div:nth-child(1) > div {
-        overflow: hidden;
+  > div:nth-child(1) > div {
+    overflow: hidden;
 
-        * {
-            padding: 0;
-        }
+    * {
+      padding: 0;
+    }
+  }
+
+  > div > div {
+    flex-direction: column;
+    justify-content: center;
+
+    > :nth-child(1) {
+      padding: 0;
     }
 
-    > div > div {
-        flex-direction: column;
-        justify-content: center;
-
-        > :nth-child(1) {
-            padding: 0;
-        }
-
-        * {
-            padding: 0;
-            text-align: center;
-            margin: auto;
-        }
+    * {
+      padding: 0;
+      text-align: center;
+      margin: auto;
     }
+  }
 }
 
 @mixin responsive_table_vertical_1100x {
-    border-radius: 0;
-    width: 25em;
-    height: unset;
+  border-radius: 0;
+  width: 25em;
+  height: unset;
 
-    > div:nth-child(1) > div {
-        overflow: hidden;
+  > div:nth-child(1) > div {
+    overflow: hidden;
 
-        * {
-            padding: 0;
-        }
+    * {
+      padding: 0;
+    }
+  }
+
+  > div > div {
+    flex-direction: column;
+    justify-content: center;
+
+    > :nth-child(1) {
+      padding: 0;
     }
 
-    > div > div {
-        flex-direction: column;
-        justify-content: center;
-
-        > :nth-child(1) {
-            padding: 0;
-        }
-
-        * {
-            padding: 0;
-            text-align: center;
-            margin: auto;
-        }
+    * {
+      padding: 0;
+      text-align: center;
+      margin: auto;
     }
+  }
 }

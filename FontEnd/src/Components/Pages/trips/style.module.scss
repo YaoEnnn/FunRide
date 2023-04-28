@@ -1,4 +1,41 @@
 @import "../../globalStyle.scss";
+@import "../../globalMixins.scss";
 .base {
-  color: red;
+  .heading {
+    width: 100%;
+    padding: 3em;
+    justify-content: center;
+    display: flex;
+    > h1 {
+      align-items: center;
+      text-align: center;
+      @include boldfont;
+    }
+  }
+  .routes {
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    > div {
+      display: flex;
+      margin: auto;
+      gap: 5em;
+      > div {
+        background-color: aqua;
+        width: 50em;
+        height: 50em;
+
+        @include lightfont;
+        @include hover_underly;
+        @include SlightRoundBorder;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+        > img {
+          width: 500px;
+          height: 51em;
+          @include SlightRoundBorder;
+        }
+      }
+    }
+  }
 }
