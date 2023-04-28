@@ -1,0 +1,21 @@
+@import "../globalMixins.scss";
+
+.l {
+  color: var(--textcolor);
+  display: flex;
+  justify-content: center;
+  padding-top: 1em;
+  padding-bottom: 1em;
+
+  span {
+    height: 1.5em !important;
+    width: 1.5em !important;
+    @include loading_circle;
+  }
+
+  label {
+    @include lightfont;
+    font-size: 0.6em !important;
+    opacity: 0.5;
+  }
+}

@@ -117,7 +117,7 @@ def display_all_admin():
     
     result = []
     for admin in admins:
-        data = {'name':admin.name, 'phone':admin.phone, 'email':admin.email, 'address':admin.address, 'gender':admin.gender}
+        data = {'id':admin.id, 'name':admin.name, 'phone':admin.phone, 'email':admin.email, 'address':admin.address, 'gender':admin.gender}
         result.append(data)
     
     return jsonify({
