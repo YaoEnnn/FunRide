@@ -296,7 +296,7 @@ def display_all_private_order():
         else:
             data = {'id':order.id, 'name':order.guest, 'phone':order.phone, 'email':order.email, 'gender':order.gender,
                  'note':order.note, 'number_guest':order.number_guest, 'departure_day':order.departure_day, 'departure_time':order.departure_time,
-                 'start':order.start, 'end':order.end, 'car_type':car.name}
+                 'start':order.start, 'end':order.end, 'car_type':car.name, 'round_trip':order.round_trip}
         
         result.append(data)
 
