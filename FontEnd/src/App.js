@@ -15,7 +15,6 @@ import SearchTrip from "./Components/Pages/searchTrip";
 import Trips from "./Components/Pages/trips";
 import Login from "./Components/Pages/Login";
 import Settings from "./Components/Pages/Settings";
-import Logout from "./Components/Pages/Logout";
 import Discount from "./Components/Pages/discount";
 
 import { AnimatePresence } from "framer-motion";
@@ -33,11 +32,24 @@ axios.defaults.headers.common["Authorization"] = localStorage.getItem("token");
 export const loginContext = createContext();
 
 function App() {
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isManager, setIsManager] = useState(false);
   const location = useLocation();
-  const [auth, setisLogin] = useState(false);
+  useEffect(() => {
+    axios.post("admin/my-profile").then((resp) => {
+      const role = resp.data.msg.role;
+      console.log(resp.data.msg.role);
+      if (role === "Admin") {
+        setIsAdmin(true);
+      }
+      if (role === "Manager") {
+        setIsManager(true);
+      }
+    });
+  });
 
   return (
-    <>
+    <loginContext.Provider value={{ isAdmin: isAdmin, isManager: isManager }}>
       <Navbar></Navbar>
       <AnimatePresence mode="wait">
         <Routes key={location.pathname} location={location}>
@@ -114,10 +126,10 @@ function App() {
             }
           ></Route>
           <Route
-            path="/Settings"
+            path="/Discountcode"
             element={
               <Protected>
-                <Settings></Settings>
+                <Discount></Discount>
               </Protected>
             }
           ></Route>
@@ -128,7 +140,7 @@ function App() {
         position={"bottom-right"}
         transition={Flip}
       />
-    </>
+    </loginContext.Provider>
   );
 }
 

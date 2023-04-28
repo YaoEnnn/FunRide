@@ -5,13 +5,13 @@ import { error, success } from "../../lib/toast";
 import axios from "axios";
 import { loginContext } from "../../../App";
 import AuthContext from "../../../context/AuthProvider";
-
+import { useNavigate } from "react-router-dom";
 function Login() {
-  const { setAuth } = useContext(AuthContext);
-  const context = useContext(loginContext);
   const usernameRef = createRef();
   const passwordRef = createRef();
   const btnRef = createRef();
+  const navigate = useNavigate();
+
   return (
     <div className={styles.base}>
       <h1>Login Page</h1>
@@ -52,6 +52,7 @@ function Login() {
                   localStorage.setItem("token", resp.data.msg);
                   axios.defaults.headers.common["Authorization"] =
                     localStorage.getItem("token");
+                  navigate("/");
                 }
               });
           }}
