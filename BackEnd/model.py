@@ -52,7 +52,7 @@ class Order(db.Model):
     phone = db.Column(db.Integer, nullable = False)
     email = db.Column(db.String(100), nullable = False)
     address = db.Column(db.String(200), nullable = False)
-    receipt = db.Column(db.Text, nullable = False, unique = True)
+    receipt = db.Column(db.String(200), nullable = False, unique = True)
     trip_id = db.Column(db.Integer, db.ForeignKey("trip.id"), nullable = False)
     price = db.Column(db.Integer, nullable = False)
     created_on = db.Column(db.DateTime, default = db.func.now())
@@ -119,7 +119,7 @@ class PrivateOrder(db.Model):
 class User(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     user_name = db.Column(db.String(50), nullable = False, unique = True)
-    password = db.Column(db.String(100), nullable = False)
+    password = db.Column(db.String(500), nullable = False)
     name = db.Column(db.String(100), nullable = False)
     email = db.Column(db.String(100), nullable = False, unique = True)
     phone = db.Column(db.Integer, nullable = False, unique = True)

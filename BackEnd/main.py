@@ -7,8 +7,8 @@ from sqlalchemy import text
 import schedule
 
 if __name__ == "__main__":
-    if not path.exists(f"{basedir}/storage.db"):
-        with app.app_context():
+    with app.app_context():
+        if not path.exists(f"{basedir}/storage.db"):
             db.create_all()
             generate_default_car_type()
             generate_default_trips()

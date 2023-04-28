@@ -6,6 +6,7 @@ os.chdir(basedir)
 
 # Database URI string
 DATABASE_URI = f"sqlite:///{basedir}/storage.db"
+# "mysql+pymysql://root:Dieuan0701080220@localhost:3306/funride"
 
 # Session Login Day for User
 TOKEN_EXPIRY: int = 15
@@ -248,7 +249,7 @@ DEFAULT_USER_LIST = [
         "user_name":"manager",
         "password":"manager",
         "name":"Manager",
-        "phone":"Unknown",
+        "phone":123456789,
         "email":"Unknown",
         "role_id":1
     },
@@ -256,7 +257,7 @@ DEFAULT_USER_LIST = [
         "user_name":"admin",
         "password":"admin",
         "name":"Admin1",
-        "phone":"0123456788",
+        "phone":123456788,
         "email":"admin@gmail.com",
         "role_id":2
     }
