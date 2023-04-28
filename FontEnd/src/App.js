@@ -18,6 +18,9 @@ import Settings from "./Components/Pages/Settings";
 import Discount from "./Components/Pages/discount";
 import AddAdmin from "./Components/Pages/Admin/add";
 import AddDiscount from "./Components/Pages/discount/add";
+import PrivateOrder from "./Components/Pages/PrivateOrder";
+import TripOrder from "./Components/Pages/Trip Order";
+import SeatPicker from "./Components/SeatPicker";
 
 import { AnimatePresence } from "framer-motion";
 import axios from "axios";
@@ -28,6 +31,7 @@ import { Flip } from "react-toastify";
 import { createContext, useEffect, useState } from "react";
 import Protected from "./Components/Protected";
 import Admin from "./Components/Pages/Admin";
+import OrderID from "./Components/Pages/Trip Order/OrderID";
 
 axios.defaults.baseURL = `http://127.0.0.1:5000`;
 axios.defaults.headers.common["Authorization"] = localStorage.getItem("token");
@@ -54,6 +58,13 @@ function App() {
     <loginContext.Provider value={{ isAdmin: isAdmin, isManager: isManager }}>
       <Navbar></Navbar>
       <AnimatePresence mode="wait">
+        {/* <SeatPicker
+          onChange={(e) => {
+            console.log(e);
+          }}
+          section1={[{ i: 1, selected: true }, { i: 2 }, { i: 3 }]}
+          section2={[{ i: 1 }, { i: 2 }, { i: 3 }]}
+        ></SeatPicker> */}
         <Routes key={location.pathname} location={location}>
           <Route
             path="/"
@@ -138,6 +149,24 @@ function App() {
             }
           >
             <Route path="add" element={<AddDiscount></AddDiscount>}></Route>
+          </Route>
+          <Route
+            path="/TripOrder"
+            element={
+              <Protected>
+                <TripOrder></TripOrder>
+              </Protected>
+            }
+          ></Route>
+          <Route
+            path="/PrivateOrder"
+            element={
+              <Protected>
+                <PrivateOrder></PrivateOrder>
+              </Protected>
+            }
+          >
+            <Route path=":id" element={<OrderID></OrderID>}></Route>
           </Route>
         </Routes>
       </AnimatePresence>

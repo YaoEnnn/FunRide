@@ -295,7 +295,7 @@ def display_all_private_order():
                  'car_type':car.name}
         else:
             data = {'id':order.id, 'name':order.guest, 'phone':order.phone, 'email':order.email, 'gender':order.gender,
-                 'note':order.note, 'number_guest':order.number_guest, 'departure_day':order.departure_day, 'departure_time':order.departure_time,
+                 'note':order.note, 'number_guest':order.number_guest,'round_trip':order.round_trip, 'departure_day':order.departure_day, 'departure_time':order.departure_time,
                  'start':order.start, 'end':order.end, 'car_type':car.name}
         
         result.append(data)
@@ -454,7 +454,7 @@ def search_private_order():
             'err':'Missing Parameters'
         })
     
-    orders = PrivateOrder.query.filter((Order.guest.ilike(f'%{user_data}%')) | (Order.phone.ilike(f'%{user_data}%'))).all()
+    orders = PrivateOrder.query.filter((PrivateOrder.guest.ilike(f'%{user_data}%')) | (PrivateOrder.phone.ilike(f'%{user_data}%'))).all()
 
     if orders:
         result = []

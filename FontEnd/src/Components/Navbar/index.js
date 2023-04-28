@@ -34,6 +34,12 @@ function Navbar() {
                 <NavLink to="/Discountcode">Discount</NavLink>
               </li>
               <li>
+                <NavLink to="/PrivateOrder">Private Order</NavLink>
+              </li>
+              <li>
+                <NavLink to="/TripOrder">Trip Order</NavLink>
+              </li>
+              <li>
                 <NavLink to="/Settings">Setting</NavLink>
               </li>
             </>
