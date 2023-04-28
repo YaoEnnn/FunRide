@@ -1,2 +1,38 @@
 @import "../../globalStyle.scss";
 @import "../../globalMixins.scss";
+
+.base {
+  padding: 3em;
+  .header {
+    display: flex;
+    > h1 {
+      @include boldfont;
+      position: absolute;
+      left: 0;
+      margin-left: 10vh;
+    }
+    > button {
+      @include btn;
+      position: absolute;
+      right: 0;
+      margin-right: 10vh;
+    }
+  }
+  .table {
+    > div {
+      margin-top: 5em;
+      @include table_style;
+      > div:nth-child(2) {
+        > div {
+          > label:nth-child(3) {
+            cursor: pointer;
+            &:hover {
+              @include transition;
+              color: aqua;
+            }
+          }
+        }
+      }
+    }
+  }
+}

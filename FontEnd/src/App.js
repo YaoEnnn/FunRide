@@ -16,6 +16,7 @@ import Trips from "./Components/Pages/trips";
 import Login from "./Components/Pages/Login";
 import Settings from "./Components/Pages/Settings";
 import Discount from "./Components/Pages/discount";
+import AddAdmin from "./Components/Pages/Admin/add";
 
 import { AnimatePresence } from "framer-motion";
 import axios from "axios";
@@ -116,7 +117,9 @@ function App() {
                 <Admin></Admin>
               </Protected>
             }
-          ></Route>
+          >
+            <Route path="add" element={<AddAdmin></AddAdmin>}></Route>
+          </Route>
           <Route
             path="/Settings"
             element={
