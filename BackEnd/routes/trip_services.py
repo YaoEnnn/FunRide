@@ -1,7 +1,7 @@
 from app import app
 from flask import request, jsonify
 from model import Trip
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, time
 from setting import MAX_TRIP_PER_PAGE
 
 @app.route('/trip/search', methods = ['GET', 'POST'])
@@ -13,7 +13,10 @@ def search_trip():
     today = datetime.today().date()
 
     #get current time
-    current_time = datetime.combine(datetime.today(), datetime.now().time())
+    current_time = datetime.now()  # Lấy thời gian hiện tại
+    delta = timedelta(hours=1)  # Tạo đối tượng timedelta với số giờ muốn cộng thêm
+
+    new_time = (current_time + delta).strftime('%H:%M:%S') 
 
     #verify if enough data?
     if data and 'end' in data and 'departure_day' in data:
@@ -32,22 +35,24 @@ def search_trip():
             'err':'Unvalid Departure Day'
         })
     
-    else:
+    if departure_day == today:
         #Filter trip base on 'end' & 'departure_day' (Just only trips later than current time 1 hour are available)
         trips = Trip.query.filter(Trip.departure_day == departure_day, Trip.end == end,
-                                  Trip.departure_time >= (current_time + timedelta(hours = 1)).time()).all()
+                                    Trip.departure_time >= new_time).all()
+    else:
+        trips = Trip.query.filter(Trip.departure_day == departure_day, Trip.end == end).all()
 
-        #Return all Trips that satisfy requirements
-        result = []
-        for trip in trips:
-            submissions_data = {'id': trip.id, 'start': trip.start, 'end': trip.end, 'departure_time': trip.departure_time.strftime("%H:%M"), 
-                                'arrived_time': trip.arrived_time, 'price': trip.price, 'departure_day': trip.departure_day, 'car_type': trip.car_type.name}
-            result.append(submissions_data)
+    #Return all Trips that satisfy requirements
+    result = []
+    for trip in trips:
+        submissions_data = {'id': trip.id, 'start': trip.start, 'end': trip.end, 'departure_time': trip.departure_time.strftime("%H:%M"), 
+                            'arrived_time': trip.arrived_time, 'price': trip.price, 'departure_day': trip.departure_day, 'car_type': trip.car_type.name}
+        result.append(submissions_data)
 
-        return jsonify({
-            'status':'OK',
-            'msg': result
-        })
+    return jsonify({
+        'status':'OK',
+        'msg': result
+    })
 
 #display all trips route
 @app.route('/trip/display-all', methods = ['POST'])
