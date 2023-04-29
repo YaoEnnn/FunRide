@@ -14,29 +14,16 @@ function PrivateTrip() {
   const addRef = createRef();
   const phoneRef = createRef();
   const departureTimeRef = createRef();
+  const departLocatoinRef = createRef();
+  const desinationRef = createRef();
   const backTimeRef = createRef();
+  const noteRef = createRef();
   const genderArray = ["Unknown", "Male", "Female"];
   const carArray = ["Limousine", "Sleeper-Bus", "Bus"];
   const [gender, setGender] = useState("");
   const [car, setCar] = useState("");
   const [end, setEnd] = useState("");
   const [start, setStart] = useState("");
-
-  const placeArray = [
-    "District 1, HCMC",
-    "BinhTan District, HCMC",
-    "BaoLoc City",
-    "VungTau City",
-  ];
-
-  const handleEndChange = (event) => {
-    setEnd(event.target.value);
-    console.log(event.target.value);
-  };
-  const handleStartChange = (event) => {
-    setStart(event.target.value);
-    console.log(event.target.value);
-  };
 
   const [isChecked, setchecked] = useState(false);
   const handleCheckBox = (e) => {
@@ -51,6 +38,8 @@ function PrivateTrip() {
   const [phone, setPhone] = useState("");
   const [guestNumber, setGuestNumber] = useState("");
   const [time, setTime] = useState("");
+  const [departLocation, setDepartLocation] = useState("");
+  const [destination, setDestination] = useState("");
 
   const handleGenderChange = (event) => {
     setGender(event.target.value);
@@ -82,15 +71,6 @@ function PrivateTrip() {
             custom_ref={phoneRef}
             onClick={() => {
               setPhone("");
-            }}
-          ></CustomInput>
-          <label>Address:</label>
-          <CustomInput
-            type="text"
-            variant={add}
-            custom_ref={addRef}
-            onClick={() => {
-              setAdd("");
             }}
           ></CustomInput>
           <label>Email:</label>
@@ -138,7 +118,7 @@ function PrivateTrip() {
             <div>
               <label>Departure time</label>
               <CustomInput
-                type="number"
+                type="text"
                 variant={time}
                 custom_ref={departureTimeRef}
                 onClick={() => {
@@ -150,31 +130,25 @@ function PrivateTrip() {
           <section>
             <div>
               <label>Departure location</label>
-              <select
-                value={start}
-                onChange={handleStartChange}
-                defaultValue={placeArray}
-              >
-                {placeArray.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
+              <CustomInput
+                type="text"
+                variant={departLocation}
+                custom_ref={departLocatoinRef}
+                onClick={() => {
+                  setDepartLocation("");
+                }}
+              ></CustomInput>
             </div>
             <div>
               <label>Destination</label>
-              <select
-                value={end}
-                onChange={handleEndChange}
-                defaultValue={placeArray}
-              >
-                {placeArray.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
+              <CustomInput
+                type="text"
+                variant={destination}
+                custom_ref={desinationRef}
+                onClick={() => {
+                  setDestination("");
+                }}
+              ></CustomInput>
             </div>
           </section>
           <div>
@@ -215,6 +189,8 @@ function PrivateTrip() {
               </option>
             ))}
           </select>
+          <label>Note</label>
+          <CustomInput type="text" custom_ref={noteRef}></CustomInput>
           <button
             onClick={() => {
               if (!nameRef.current.value) {
@@ -225,11 +201,6 @@ function PrivateTrip() {
                 error("Enter your phone");
                 setPhone("error");
               }
-              if (!addRef.current.value) {
-                error("Enter your address");
-                setAdd("error");
-                return;
-              }
               if (!emailRef.current.value) {
                 error("Enter your email");
                 setEmail("error");
@@ -237,6 +208,16 @@ function PrivateTrip() {
               }
               if (gender === "Unknown" || gender === "") {
                 error("Choose your gender");
+                return;
+              }
+              if (!departLocatoinRef.current.value) {
+                error("Please enter departure location");
+                setDepartLocation("error");
+                return;
+              }
+              if (!desinationRef.current.value) {
+                error("Please enter your destination");
+                setDestination("error");
                 return;
               }
               const a =
@@ -252,15 +233,21 @@ function PrivateTrip() {
                   number_guest: guestRef.current.value,
                   departure_day: date,
                   departure_time: departureTimeRef.current.value,
-                  start: start,
-                  end: end,
+                  start: departLocatoinRef.current.value,
+                  end: desinationRef.current.value,
                   round_trip: isChecked,
                   car_type: car,
                   back_day: b,
                   back_time: a,
+                  note: noteRef.current.value,
                 })
                 .then((resp) => {
                   console.log(resp);
+                  if (resp.data.status === "FAIL") {
+                    error(resp.data.err);
+                    return;
+                  }
+                  success("Private trip successfully added");
                 });
             }}
           >
