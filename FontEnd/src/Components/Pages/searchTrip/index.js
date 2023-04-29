@@ -1,14 +1,22 @@
 import styles from "./style.module.scss";
 import AnimatedOutlet from "../../AnimatedOutlet";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { error } from "../../lib/toast";
 import { useNavigate } from "react-router-dom";
 import { useOutlet } from "react-router-dom";
 import moment from "moment";
 import "react-datetime/css/react-datetime.css";
+import { loginContext } from "../../../App";
+import Popup from "./PopUp/popup";
 
 function SearchTrip() {
+  const isBigRole = useContext(loginContext);
+  const [showPopUp, setShowPopUp] = useState(false);
+  const handleClosePopUp = () => {
+    setShowPopUp(false);
+  };
+
   const [dt, setDt] = useState(moment());
   const yesterday = moment().subtract(1, "day");
   const disablePastDt = (current) => {
@@ -210,8 +218,18 @@ function SearchTrip() {
     <AnimatedOutlet>
       <div className={styles.base}>
         <div className={styles.searchBar}>
+          {(isBigRole.isAdmin === true || isBigRole.isManager === true) && (
+            <button
+              className={styles.addtrip}
+              onClick={() => {
+                setShowPopUp(true);
+              }}
+            >
+              Add Trip
+            </button>
+          )}
+          {showPopUp && <Popup handleClose={handleClosePopUp}></Popup>}
           <h1>--Display all Trips--</h1>
-          <h1>Press this button to search</h1>
           <section className={styles.mainInput}>
             <button
               onClick={() => {

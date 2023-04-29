@@ -1,0 +1,18 @@
+@import "../../../globalStyle.scss";
+@import "../../../globalMixins.scss";
+.base {
+  padding: 3em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  > h1 {
+    @include boldfont;
+  }
+  > button {
+    display: flex;
+    margin: auto;
+    @include btn;
+    justify-content: center;
+    align-items: center;
+  }
+}

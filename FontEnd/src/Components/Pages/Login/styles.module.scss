@@ -3,9 +3,20 @@
 
 .base {
   padding: 3em;
+  > h1 {
+    @include boldfont;
+    margin-bottom: 1em;
+  }
   > div {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
     > button {
       @include btn;
+    }
+    > p {
+      cursor: pointer;
+      @include hover_underly;
     }
   }
 }

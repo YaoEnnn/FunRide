@@ -1,3 +1,4 @@
+@import "../globalMixins.scss";
 .base {
   nav {
     background-color: #333;
@@ -28,9 +29,16 @@
     font-size: 18px;
     font-weight: bold;
     text-transform: uppercase;
+    box-shadow: none;
+    transition: all 0.2s ease-in-out;
   }
 
   nav a:hover {
     color: #ffc107;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    background-color: #9ca19ca6;
+    padding: 0.3em;
+    transform: scale(1.1); // change to desired scale
+    @include SquareRoundBorder;
   }
 }

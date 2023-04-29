@@ -1,4 +1,74 @@
 @import "../../globalStyle.scss";
+@import "../../globalMixins.scss";
 .base {
-  color: red;
+  .contactpage {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+
+    h1 {
+      @include boldfont;
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      .formgroup {
+        margin-bottom: 20px;
+
+        label {
+          display: block;
+          @include lightfont;
+          font-size: 18px;
+          font-weight: bold;
+          margin-bottom: 10px;
+        }
+
+        input,
+        textarea {
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          font-size: 16px;
+          width: 100%;
+        }
+
+        textarea {
+          height: 200px;
+        }
+      }
+
+      button[type="submit"] {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+
+        &:hover {
+          @include transition;
+          transform: scale(1.01);
+          -webkit-transform: scale(1.01);
+          -moz-transform: scale(1.01);
+          -ms-transform: scale(1.01);
+          -o-transform: scale(1.01);
+          -webkit-transform: scale(1.01);
+          background-color: crimson;
+          color: white;
+
+          &::after {
+            background-color: #007bff;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
 }

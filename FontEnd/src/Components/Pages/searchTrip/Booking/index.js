@@ -120,8 +120,14 @@ function Booking() {
           </div>
           {vehicle === "Limousine" && (
             <SeatPicker
-              onChange={(seat) => {
-                console.log(seat);
+              onChange={(seatChange) => {
+                let a = [];
+                for (const i of seatChange) {
+                  a.push(i.id);
+                  console.log(a);
+                }
+                SetSeat(a);
+                // console.log(seatChange);
               }}
               section1={[{ i: 1 }, { i: 2 }, { i: 3 }, { i: 4 }]}
               section2={[{ i: 5 }, { i: 6 }, { i: 7 }, { i: 8 }]}
@@ -129,8 +135,14 @@ function Booking() {
           )}
           {vehicle === "Bus" && (
             <SeatPicker
-              onChange={(seat) => {
-                console.log(seat);
+              onChange={(seatChange) => {
+                let a = [];
+                for (const i of seatChange) {
+                  a.push(i.id);
+                  console.log(a);
+                }
+                SetSeat(a);
+                // console.log(seatChange);
               }}
               section1={[
                 { i: 1 },
@@ -168,8 +180,14 @@ function Booking() {
           )}
           {vehicle === "Sleeper-Bus" && (
             <SeatPicker
-              onChange={(seat) => {
-                console.log(seat);
+              onChange={(seatChange) => {
+                let a = [];
+                for (const i of seatChange) {
+                  a.push(i.id);
+                  console.log(a);
+                }
+                SetSeat(a);
+                // console.log(seatChange);
               }}
               section1={[
                 { i: 1 },
@@ -196,6 +214,7 @@ function Booking() {
           )}
           <button
             onClick={() => {
+              console.log(seat);
               if (!nameRef.current.value) {
                 error("Please enter your name");
                 setName("error");
@@ -230,7 +249,7 @@ function Booking() {
                   seat: seat,
                 })
                 .then((resp) => {
-                  console.log(resp);
+                  console.log(resp.data.msg);
                 });
             }}
           >

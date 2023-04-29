@@ -210,7 +210,7 @@ def booking_private():
 
     #check if number_guest suitable for car_type
     car_book = CarType.query.filter_by(name = car_type).first()
-    if car_book.seat < number_guest:
+    if car_book.seat < int(number_guest):
         return jsonify({
             'status':'FAIL',
             'err':f'{car_type} Does Not Have Enough Seats'

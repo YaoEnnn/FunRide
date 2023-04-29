@@ -14,16 +14,13 @@ function Navbar() {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <NavLink to="/searchTrip">Search Trip</NavLink>
+            <NavLink to="/searchTrip">Trip</NavLink>
           </li>
           <li>
             <NavLink to="/privateTrip">Private Trip</NavLink>
           </li>
           <li>
-            <NavLink to="/news">News</NavLink>
-          </li>
-          <li>
-            <NavLink to="/trips">Trip's Info</NavLink>
+            <NavLink to="/trips">Info</NavLink>
           </li>
           <li>
             <NavLink to="/contact">Contact</NavLink>

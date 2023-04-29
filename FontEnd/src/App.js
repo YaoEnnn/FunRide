@@ -9,7 +9,6 @@ import Navbar from "./Components/Navbar";
 import Home from "./Components/Pages/home";
 import DefaultLayout from "./Components/Layout/DefaultLayout";
 import Contact from "./Components/Pages/contact";
-import News from "./Components/Pages/news";
 import PrivateTrip from "./Components/Pages/privateTrip";
 import SearchTrip from "./Components/Pages/searchTrip";
 import Trips from "./Components/Pages/trips";
@@ -29,9 +28,10 @@ import VTBtDis from "./Components/Pages/RecommendTrip/VT-BtDis";
 import BLDis1 from "./Components/Pages/RecommendTrip/BL-Dis1";
 import BLBtDis from "./Components/Pages/RecommendTrip/BL-BtDis";
 import SearchBarTrip from "./Components/Pages/SearchBarTrip";
-import SeatPicker from "./Components/SeatPicker";
 import Booking from "./Components/Pages/searchTrip/Booking";
 import TripOrderID from "./Components/Pages/Trip Order/TripOrderID";
+import EnterCode from "./Components/Pages/Login/RecoverPassword/EnterCode";
+import ChangePassword from "./Components/Pages/Login/RecoverPassword/EnterCode/ChangePassword";
 
 import { AnimatePresence } from "framer-motion";
 import axios from "axios";
@@ -43,6 +43,7 @@ import { createContext, useEffect, useState } from "react";
 import Protected from "./Components/Protected";
 import Admin from "./Components/Pages/Admin";
 import OrderID from "./Components/Pages/Trip Order/OrderID";
+import ForgotPassword from "./Components/Pages/Login/RecoverPassword";
 
 axios.defaults.baseURL = `http://127.0.0.1:5000`;
 axios.defaults.headers.common["Authorization"] = localStorage.getItem("token");
@@ -69,13 +70,6 @@ function App() {
     <loginContext.Provider value={{ isAdmin: isAdmin, isManager: isManager }}>
       <Navbar></Navbar>
       <AnimatePresence mode="wait">
-        {/* <SeatPicker
-          onChange={(e) => {
-            console.log(e);
-          }}
-          section1={[{ i: 1, selected: true }, { i: 2 }, { i: 3 }]}
-          section2={[{ i: 1 }, { i: 2 }, { i: 3 }]}
-        ></SeatPicker> */}
         <Routes key={location.pathname} location={location}>
           <Route
             path="/"
@@ -201,14 +195,7 @@ function App() {
               </DefaultLayout>
             }
           ></Route>
-          <Route
-            path="/news"
-            element={
-              <DefaultLayout>
-                <News></News>
-              </DefaultLayout>
-            }
-          ></Route>
+
           <Route
             path="/trips"
             element={
@@ -224,7 +211,19 @@ function App() {
                 <Login></Login>
               </DefaultLayout>
             }
-          ></Route>
+          >
+            <Route
+              path="ForgotPassword"
+              element={<ForgotPassword></ForgotPassword>}
+            >
+              <Route path="EnterCode" element={<EnterCode></EnterCode>}>
+                <Route
+                  path="ChangePassword"
+                  element={<ChangePassword></ChangePassword>}
+                ></Route>
+              </Route>
+            </Route>
+          </Route>
           <Route
             path="/Admin"
             element={

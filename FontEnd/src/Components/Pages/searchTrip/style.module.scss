@@ -9,6 +9,9 @@
     justify-content: center;
     align-items: center;
     gap: 1em;
+    > button {
+      @include btn;
+    }
     > h1 {
       @include boldfont;
       font-size: 1.5em;
@@ -77,6 +80,7 @@
     > button {
       @include btn;
       display: flex;
+      text-align: center;
       align-items: center;
       justify-content: center;
       width: fit-content !important;

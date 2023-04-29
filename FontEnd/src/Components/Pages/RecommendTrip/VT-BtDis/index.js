@@ -1,12 +1,19 @@
 import styles from "./style.module.scss";
 import AnimatedOutlet from "../../../AnimatedOutlet";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { error } from "../../../lib/toast";
 import { useNavigate } from "react-router-dom";
 import { useOutlet } from "react-router-dom";
+import { loginContext } from "../../../../App";
 
 function VTBtDis() {
+  const isBigRole = useContext(loginContext);
+  const [showPopUp, setShowPopUp] = useState(false);
+  const handleClosePopUp = () => {
+    setShowPopUp(false);
+  };
+
   const [date, setDate] = useState();
   const [currentTrip, setCurrentTrip] = useState(null);
   const [value, setvalue] = useState(null);

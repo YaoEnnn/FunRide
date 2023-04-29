@@ -5,12 +5,17 @@ import { error, success } from "../../lib/toast";
 import axios from "axios";
 import { loginContext } from "../../../App";
 import AuthContext from "../../../context/AuthProvider";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutlet } from "react-router-dom";
 function Login() {
   const usernameRef = createRef();
   const passwordRef = createRef();
   const btnRef = createRef();
   const navigate = useNavigate();
+
+  const outlet = useOutlet();
+  if (outlet) {
+    return outlet;
+  }
 
   return (
     <div className={styles.base}>
@@ -26,6 +31,7 @@ function Login() {
           type="password"
           placeholder={"Password"}
         ></CustomInput>
+
         <button
           ref={btnRef}
           onClick={() => {
@@ -59,6 +65,13 @@ function Login() {
         >
           Confirm
         </button>
+        <p
+          onClick={() => {
+            navigate("ForgotPassword");
+          }}
+        >
+          Forgot Password
+        </p>
       </div>
     </div>
   );

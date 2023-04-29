@@ -6,8 +6,16 @@ import { error } from "../../lib/toast";
 import { useNavigate } from "react-router-dom";
 import { useOutlet } from "react-router-dom";
 import "react-datetime/css/react-datetime.css";
+import { loginContext } from "../../../App";
+import Popup from "./PopUp/popup";
 
 function SearchBarTrip() {
+  const isBigRole = useContext(loginContext);
+  const [showPopUp, setShowPopUp] = useState(false);
+  const handleClosePopUp = () => {
+    setShowPopUp(false);
+  };
+
   const [date, setDate] = useState();
   const [currentTrip, setCurrentTrip] = useState(null);
   const [value, setvalue] = useState(null);
@@ -198,6 +206,17 @@ function SearchBarTrip() {
     <AnimatedOutlet>
       <div className={styles.base}>
         <div className={styles.searchBar}>
+          {(isBigRole.isAdmin === true || isBigRole.isManager === true) && (
+            <button
+              className={styles.addtrip}
+              onClick={() => {
+                setShowPopUp(true);
+              }}
+            >
+              Add Trip
+            </button>
+          )}
+          {showPopUp && <Popup handleClose={handleClosePopUp}></Popup>}
           <h1>--Search Bar--</h1>
           <section className={styles.mainInput}>
             <select

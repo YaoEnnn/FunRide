@@ -3,6 +3,9 @@
 
 .base {
   background-color: white;
+  > button {
+    @include btn;
+  }
   .searchBar {
     padding: 5em;
     display: flex;
@@ -10,6 +13,9 @@
     justify-content: center;
     align-items: center;
     gap: 2em;
+    > button {
+      @include btn;
+    }
     > h1 {
       @include boldfont;
       font-size: 2.5em;
@@ -64,7 +70,11 @@
   }
   .listView {
     padding: 5em;
+
     .sort {
+      > button {
+        @include btn;
+      }
       > h1 {
         @include boldfont;
         font-size: 2.5em;
