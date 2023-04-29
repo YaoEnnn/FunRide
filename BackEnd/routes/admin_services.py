@@ -169,11 +169,17 @@ def display_all_order():
         else:
             offer_code = order.offer_code
 
+        seats = order.seat_ref
+        seat_num = []
+        for seat in seats:
+            data_seat = seat.seat_number
+            seat_num.append(data_seat)
+
         data = {'id':order.id, 'name':order.guest, 'phone':order.phone, 'email':order.email, 'address':order.address,
                 'gender':order.gender, 'receipt':order.receipt, 'start':order.trip.start, 'end':order.trip.end,
                 'departure_time':order.trip.departure_time.strftime('%H:%M'), 'arrived_time':order.trip.arrived_time,
                 'departure_day':order.trip.departure_day, 'price':order.price, 'car_type':order.trip.car_type.name,
-                'created_on':order.created_on, 'offer_code':offer_code}
+                'created_on':order.created_on, 'offer_code':offer_code, 'seat':seat_num}
         result.append(data)
     
     return jsonify({
