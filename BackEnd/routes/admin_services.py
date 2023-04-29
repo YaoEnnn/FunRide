@@ -159,8 +159,10 @@ def display_all_order():
             'err':'No Order Available'
         })
     
+    sorted_orders = sorted(orders, key=lambda order: order.created_on, reverse=True)
+    
     result = []
-    for order in orders:
+    for order in sorted_orders:
         #check offer code
         if order.offer_code == None:
             offer_code = 'N/A'
