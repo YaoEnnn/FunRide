@@ -3,24 +3,56 @@
 .base {
   background-color: white;
   .searchBar {
-    padding-top: 1em;
+    padding: 5em;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1em;
+    gap: 2em;
     > h1 {
       @include boldfont;
-      font-size: 1.5em;
+      font-size: 2.5em;
     }
 
     .mainInput {
       display: flex;
-      gap: 1em;
+      gap: 1.5em;
       align-items: center;
+      > select {
+        border: 2px solid rgba(65, 64, 64, 0.315);
+        padding-inline: 4em;
+        margin: auto;
+        display: flex;
+        // justify-content: center;
+        // align-items: center;
+        text-align: center;
+        @include lightfont;
+        @include SlightRoundBorder;
+        font-size: 1em;
+        filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.288));
+        padding-block: 1em;
+        > option {
+          text-align: center;
+          display: flex;
+          margin: auto;
+          justify-content: center;
+          align-items: center;
+          font-size: 0.95em;
+          @include lightfont;
+        }
+      }
+      > input {
+        border: 2px solid rgba(65, 64, 64, 0.315);
+        @include lightfont;
+        @include SlightRoundBorder;
+        text-align: center;
+        font-size: 1em;
+        filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.288));
+        padding-block: 1em;
+      }
       > button {
         vertical-align: middle;
-        width: 100%;
+        padding-block: 2em;
         align-items: center;
         justify-content: center;
         display: flex;
@@ -30,18 +62,12 @@
     }
   }
   .listView {
-    padding: 1em;
+    padding: 5em;
     .sort {
-      width: 100%;
-      margin: auto;
-      display: flex;
-      flex-direction: column;
       > h1 {
         @include boldfont;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
         font-size: 2.5em;
+        margin-left: 1.4em;
       }
       > select {
         border: 2px solid rgba(65, 64, 64, 0.315);
@@ -64,7 +90,6 @@
     }
   }
   .cardview {
-    margin-top: 3em;
     border-top: 1px black;
     filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.288));
     display: flex;

@@ -222,7 +222,7 @@ function Booking() {
               }
               axios
                 .post(`trip/${id.id}/order`, {
-                  name: nameRef.current.value,
+                  guest: nameRef.current.value,
                   gender: gender,
                   phone: phoneRef.current.value,
                   email: emailRef.current.value,

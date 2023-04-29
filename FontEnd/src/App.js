@@ -28,8 +28,10 @@ import VTDis1 from "./Components/Pages/RecommendTrip/VT-Dis1";
 import VTBtDis from "./Components/Pages/RecommendTrip/VT-BtDis";
 import BLDis1 from "./Components/Pages/RecommendTrip/BL-Dis1";
 import BLBtDis from "./Components/Pages/RecommendTrip/BL-BtDis";
+import SearchBarTrip from "./Components/Pages/SearchBarTrip";
 import SeatPicker from "./Components/SeatPicker";
 import Booking from "./Components/Pages/searchTrip/Booking";
+import TripOrderID from "./Components/Pages/Trip Order/TripOrderID";
 
 import { AnimatePresence } from "framer-motion";
 import axios from "axios";
@@ -96,6 +98,16 @@ function App() {
             element={
               <DefaultLayout>
                 <SearchTrip></SearchTrip>
+              </DefaultLayout>
+            }
+          >
+            <Route path=":id" element={<Booking></Booking>}></Route>
+          </Route>
+          <Route
+            path="/searchBarTrip"
+            element={
+              <DefaultLayout>
+                <SearchBarTrip></SearchBarTrip>
               </DefaultLayout>
             }
           >
@@ -248,7 +260,9 @@ function App() {
                 <TripOrder></TripOrder>
               </Protected>
             }
-          ></Route>
+          >
+            <Route path=":id" element={<TripOrderID></TripOrderID>}></Route>
+          </Route>
           <Route
             path="/PrivateOrder"
             element={

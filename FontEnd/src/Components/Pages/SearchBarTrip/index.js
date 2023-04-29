@@ -1,25 +1,18 @@
 import styles from "./style.module.scss";
 import AnimatedOutlet from "../../AnimatedOutlet";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { error } from "../../lib/toast";
 import { useNavigate } from "react-router-dom";
 import { useOutlet } from "react-router-dom";
-import moment from "moment";
 import "react-datetime/css/react-datetime.css";
 
-function SearchTrip() {
-  const [dt, setDt] = useState(moment());
-  const yesterday = moment().subtract(1, "day");
-  const disablePastDt = (current) => {
-    return current.isAfter(yesterday);
-  };
+function SearchBarTrip() {
   const [date, setDate] = useState();
   const [currentTrip, setCurrentTrip] = useState(null);
   const [value, setvalue] = useState(null);
   const [end, setEnd] = useState("");
   const [trip, setTrip] = useState([]);
-  const [booking, setBooking] = useState([]);
   const [count, setCount] = useState(20);
   const navigate = useNavigate();
   const loadMore = () => {
@@ -38,6 +31,7 @@ function SearchTrip() {
     "Earliest - Latest",
     "Latest - Earliest",
   ];
+
   const [sort, setSort] = useState("");
   const handleSortChange = (event) => {
     setSort(event.target.value);
@@ -46,11 +40,11 @@ function SearchTrip() {
       axios
         .post("trip/order-by-user", {
           start: "District 1, HCMC",
-          end: null,
+          end: end,
           departure_time: null,
           price: null,
           car_type: null,
-          departure_day: null,
+          departure_day: date,
         })
         .then((resp) => {
           console.log(resp.data.msg);
@@ -61,11 +55,11 @@ function SearchTrip() {
       axios
         .post("trip/order-by-user", {
           start: "BinhTan District, HCMC",
-          end: null,
+          end: end,
           departure_time: null,
           price: null,
           car_type: null,
-          departure_day: null,
+          departure_day: date,
         })
         .then((resp) => {
           console.log(resp.data.msg);
@@ -76,11 +70,11 @@ function SearchTrip() {
       axios
         .post("trip/order-by-user", {
           start: null,
-          end: null,
+          end: end,
           departure_time: null,
           price: null,
           car_type: "Limousine",
-          departure_day: null,
+          departure_day: date,
         })
         .then((resp) => {
           console.log(resp.data.msg);
@@ -91,11 +85,11 @@ function SearchTrip() {
       axios
         .post("trip/order-by-user", {
           start: null,
-          end: null,
+          end: end,
           departure_time: null,
           price: null,
           car_type: "Bus",
-          departure_day: null,
+          departure_day: date,
         })
         .then((resp) => {
           console.log(resp.data.msg);
@@ -106,11 +100,11 @@ function SearchTrip() {
       axios
         .post("trip/order-by-user", {
           start: null,
-          end: null,
+          end: end,
           departure_time: null,
           price: null,
           car_type: "Sleeper-Bus",
-          departure_day: null,
+          departure_day: date,
         })
         .then((resp) => {
           console.log(resp.data.msg);
@@ -121,11 +115,11 @@ function SearchTrip() {
       axios
         .post("trip/order-by-user", {
           start: null,
-          end: null,
+          end: end,
           departure_time: null,
           price: "Price Ascend",
           car_type: null,
-          departure_day: null,
+          departure_day: date,
         })
         .then((resp) => {
           console.log(resp.data.msg);
@@ -136,11 +130,11 @@ function SearchTrip() {
       axios
         .post("trip/order-by-user", {
           start: null,
-          end: null,
+          end: end,
           departure_time: null,
           price: "Price Descend",
           car_type: null,
-          departure_day: null,
+          departure_day: date,
         })
         .then((resp) => {
           console.log(resp.data.msg);
@@ -151,11 +145,11 @@ function SearchTrip() {
       axios
         .post("trip/order-by-user", {
           start: null,
-          end: null,
+          end: end,
           departure_time: "Earliest",
           price: null,
           car_type: null,
-          departure_day: null,
+          departure_day: date,
         })
         .then((resp) => {
           console.log(resp.data.msg);
@@ -182,8 +176,8 @@ function SearchTrip() {
   const endArray = [
     "Unknown",
     "District 1, HCMC",
-    "Binh Tan District, HCMC",
-    "Bao Loc City",
+    "BinhTan District, HCMC",
+    "BaoLoc City",
     "VungTau City",
   ];
   const carType = [];
@@ -192,12 +186,6 @@ function SearchTrip() {
     setEnd(event.target.value);
     console.log(event.target.value);
   };
-
-  useEffect(() => {
-    axios.post("trip/display-all").then((resp) => {
-      setTrip(resp.data.msg);
-    });
-  }, []);
 
   useEffect(() => {}, [value]);
 
@@ -210,15 +198,49 @@ function SearchTrip() {
     <AnimatedOutlet>
       <div className={styles.base}>
         <div className={styles.searchBar}>
-          <h1>--Display all Trips--</h1>
-          <h1>Press this button to search</h1>
+          <h1>--Search Bar--</h1>
           <section className={styles.mainInput}>
+            <select
+              value={end}
+              onChange={handleEndChange}
+              defaultValue={endArray}
+            >
+              {endArray.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+            <input
+              type="date"
+              onChange={(e) => {
+                setDate(e.target.value);
+                console.log(e.target.value);
+              }}
+            ></input>
             <button
               onClick={() => {
-                navigate("/searchBarTrip");
+                if (end === "Unknown" || end === "") {
+                  console.log("pleple");
+                  error("Please input your desired destination");
+                }
+                console.log(date);
+                if (date === undefined) {
+                  error("Please input your desired date");
+                  return;
+                } else {
+                  axios
+                    .post("trip/search", {
+                      end: end,
+                      departure_day: date,
+                    })
+                    .then((resp) => {
+                      setTrip(resp.data.msg);
+                    });
+                }
               }}
             >
-              Search
+              Confirm
             </button>
           </section>
         </div>
@@ -296,4 +318,4 @@ function SearchTrip() {
     </AnimatedOutlet>
   );
 }
-export default SearchTrip;
+export default SearchBarTrip;

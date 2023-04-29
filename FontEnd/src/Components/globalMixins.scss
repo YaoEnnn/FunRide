@@ -578,3 +578,17 @@
     }
   }
 }
+
+@mixin Selection {
+  border: 2px solid rgba(65, 64, 64, 0.315);
+  @include lightfont;
+  font-size: 0.9em;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.288));
+  padding-block: 1.5em;
+
+  > option {
+    @include transition;
+    font-size: 0.95em;
+    @include lightfont;
+  }
+}

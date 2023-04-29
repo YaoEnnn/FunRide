@@ -1,4 +1,45 @@
 @import "../../globalStyle.scss";
+@import "../../globalMixins.scss";
+
 .base {
-  color: red;
+  padding: 3em;
+  .header {
+    display: flex;
+    > h1 {
+      @include boldfont;
+      margin-left: 30vh;
+    }
+    > input {
+      position: absolute;
+      right: 0;
+      margin-right: 30vh;
+    }
+    > button {
+      @include btn;
+      margin-left: 5em;
+      justify-content: center;
+      align-items: baseline;
+    }
+  }
+  .privateOrder {
+    > div {
+      margin-top: 5em;
+      @include table_style;
+
+      > div:nth-child(2) {
+        background-color: white;
+        cursor: pointer;
+        & :hover {
+          @include transition;
+          @include boldfont;
+          transform: scale(1.01);
+          -webkit-transform: scale(1.01);
+          -moz-transform: scale(1.01);
+          -ms-transform: scale(1.01);
+          -o-transform: scale(1.01);
+          -webkit-transform: scale(1.01);
+        }
+      }
+    }
+  }
 }
