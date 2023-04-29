@@ -80,7 +80,7 @@ function AddDiscount() {
                 });
             }}
           >
-            Create a new admin
+            Create a new discount
           </button>
         </div>
       </div>
