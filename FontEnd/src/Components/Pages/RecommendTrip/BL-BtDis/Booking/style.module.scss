@@ -1,0 +1,46 @@
+@import "../../../globalStyle.scss";
+@import "../../../globalMixins.scss";
+.base {
+  padding: 3em;
+
+  .header {
+    > h1 {
+      @include boldfont;
+    }
+  }
+  .allValue {
+    display: flex;
+    flex-direction: column;
+    > select {
+      border: 2px solid rgba(65, 64, 64, 0.315);
+      @include lightfont;
+      font-size: 0.9em;
+      filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.288));
+      padding-block: 1.5em;
+
+      > option {
+        @include transition;
+        font-size: 0.95em;
+        @include lightfont;
+      }
+    }
+    > label {
+      @include lightfont;
+      font-size: 1.3em;
+    }
+  }
+  .bookSeat {
+    display: flex;
+    flex-direction: column;
+    > button {
+      display: flex;
+      margin-top: 2em !important;
+      width: 25em !important;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+      font-size: 1em;
+      @include btn;
+    }
+  }
+}

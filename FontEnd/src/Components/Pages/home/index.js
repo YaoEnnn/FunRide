@@ -24,15 +24,57 @@ function Home() {
               >
                 Route Dis 1 - VT
               </div>
-              <div>Route Dis 1 - BL</div>
-              <div>Route BT Dis - VT</div>
-              <div>Route BT Dis - BL</div>
+              <div
+                onClick={() => {
+                  navigate("/Dis1-BL");
+                }}
+              >
+                Route Dis 1 - BL
+              </div>
+              <div
+                onClick={() => {
+                  navigate("/BtDis-VT");
+                }}
+              >
+                Route BT Dis - VT
+              </div>
+              <div
+                onClick={() => {
+                  navigate("/BtDis-BL");
+                }}
+              >
+                Route BT Dis - BL
+              </div>
             </div>
             <div>
-              <div>Route VT - Dis 1</div>
-              <div>Route VT - BT Dis</div>
-              <div>Route BL - Dis 1</div>
-              <div>Route BL - BT Dis</div>
+              <div
+                onClick={() => {
+                  navigate("/VT-Dis1");
+                }}
+              >
+                Route VT - Dis 1
+              </div>
+              <div
+                onClick={() => {
+                  navigate("/VT-BtDis");
+                }}
+              >
+                Route VT - BT Dis
+              </div>
+              <div
+                onClick={() => {
+                  navigate("/BL-Dis1");
+                }}
+              >
+                Route BL - Dis 1
+              </div>
+              <div
+                onClick={() => {
+                  navigate("/BL-BtDis");
+                }}
+              >
+                Route BL - BT Dis
+              </div>
             </div>
           </div>
           <h1>--Customers' Reviews</h1>

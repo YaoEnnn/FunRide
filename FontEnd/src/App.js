@@ -21,6 +21,13 @@ import AddDiscount from "./Components/Pages/discount/add";
 import PrivateOrder from "./Components/Pages/PrivateOrder";
 import TripOrder from "./Components/Pages/Trip Order";
 import Dis1VT from "./Components/Pages/RecommendTrip/Dis1-VT";
+import Dis1BL from "./Components/Pages/RecommendTrip/Dis1-BL";
+import BtDisVT from "./Components/Pages/RecommendTrip/BtDis-VT";
+import BtDisBL from "./Components/Pages/RecommendTrip/BtDis-BL";
+import VTDis1 from "./Components/Pages/RecommendTrip/VT-Dis1";
+import VTBtDis from "./Components/Pages/RecommendTrip/VT-BtDis";
+import BLDis1 from "./Components/Pages/RecommendTrip/BL-Dis1";
+import BLBtDis from "./Components/Pages/RecommendTrip/BL-BtDis";
 import SeatPicker from "./Components/SeatPicker";
 import Booking from "./Components/Pages/searchTrip/Booking";
 
@@ -99,6 +106,76 @@ function App() {
             element={
               <DefaultLayout>
                 <Dis1VT></Dis1VT>
+              </DefaultLayout>
+            }
+          >
+            <Route path=":id" element={<Booking></Booking>}></Route>
+          </Route>
+          <Route
+            path="/Dis1-BL"
+            element={
+              <DefaultLayout>
+                <Dis1BL></Dis1BL>
+              </DefaultLayout>
+            }
+          >
+            <Route path=":id" element={<Booking></Booking>}></Route>
+          </Route>
+          <Route
+            path="/BtDis-VT"
+            element={
+              <DefaultLayout>
+                <BtDisVT></BtDisVT>
+              </DefaultLayout>
+            }
+          >
+            <Route path=":id" element={<Booking></Booking>}></Route>
+          </Route>
+          <Route
+            path="/BtDis-BL"
+            element={
+              <DefaultLayout>
+                <BtDisBL></BtDisBL>
+              </DefaultLayout>
+            }
+          >
+            <Route path=":id" element={<Booking></Booking>}></Route>
+          </Route>
+          <Route
+            path="/VT-Dis1"
+            element={
+              <DefaultLayout>
+                <VTDis1></VTDis1>
+              </DefaultLayout>
+            }
+          >
+            <Route path=":id" element={<Booking></Booking>}></Route>
+          </Route>
+          <Route
+            path="/VT-BtDis"
+            element={
+              <DefaultLayout>
+                <VTBtDis></VTBtDis>
+              </DefaultLayout>
+            }
+          >
+            <Route path=":id" element={<Booking></Booking>}></Route>
+          </Route>
+          <Route
+            path="/BL-Dis1"
+            element={
+              <DefaultLayout>
+                <BLDis1></BLDis1>
+              </DefaultLayout>
+            }
+          >
+            <Route path=":id" element={<Booking></Booking>}></Route>
+          </Route>
+          <Route
+            path="/BL-BtDis"
+            element={
+              <DefaultLayout>
+                <BLBtDis></BLBtDis>
               </DefaultLayout>
             }
           >
