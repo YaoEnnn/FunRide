@@ -13,6 +13,7 @@ function TripOrderID() {
   const [TripDetail, setTripDetail] = useState([]);
   const [showPopUp, setShowPopUp] = useState(false);
   const [isChecked, setchecked] = useState(false);
+  const [renderList, setRenderList] = useState();
 
   const handleCheckBox = (e) => {
     console.log(e.target.checked);
@@ -40,6 +41,10 @@ function TripOrderID() {
     axios.post(`admin/get/order/${id.id}`).then((resp) => {
       setTripDetail(resp.data.msg);
       console.log(resp.data.msg);
+      console.log(TripDetail.seat);
+      setRenderList(
+        TripDetail.seat.map((item, id) => <label key={id}>{item},</label>)
+      );
     });
   }, []);
   return (
@@ -59,6 +64,7 @@ function TripOrderID() {
             <label>Arriving at: {TripDetail.arrived_time}</label>
           </div>
           <div>
+            <label>Seat Number: {renderList}</label>
             <label>Phone: {TripDetail.phone}</label>
             <label>Discount Code {TripDetail.offer_code}</label>
             <label>Departure Time: {TripDetail.departure_time}</label>
