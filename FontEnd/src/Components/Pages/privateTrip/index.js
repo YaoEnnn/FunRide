@@ -169,10 +169,7 @@ function PrivateTrip() {
                   }}
                 ></input>
                 <label>Back Time</label>
-                <CustomInput
-                  type="number"
-                  custom_ref={backTimeRef}
-                ></CustomInput>
+                <CustomInput type="text" custom_ref={backTimeRef}></CustomInput>
               </>
             )}
           </div>
