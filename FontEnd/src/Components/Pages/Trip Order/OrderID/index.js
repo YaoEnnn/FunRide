@@ -13,10 +13,6 @@ function OrderID() {
   const [TripDetail, setTripDetail] = useState([]);
   const [showPopUp, setShowPopUp] = useState(false);
   const [isChecked, setchecked] = useState(false);
-  const seatList = TripDetail.seat;
-  const renderList = seatList.map((item, index) => (
-    <div key={index}>{item}</div>
-  ));
 
   const handleCheckBox = (e) => {
     console.log(e.target.checked);
