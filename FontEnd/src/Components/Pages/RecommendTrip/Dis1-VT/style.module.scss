@@ -1,0 +1,108 @@
+@import "../../../globalStyle.scss";
+@import "../../../globalMixins.scss";
+.base {
+  background-color: white;
+  .searchBar {
+    padding: 5em;
+
+    > h1 {
+      @include boldfont;
+      font-size: 2.5em;
+    }
+
+    .mainInput {
+      display: flex;
+      gap: 1em;
+      align-items: center;
+      > select {
+        border: 2px solid rgba(65, 64, 64, 0.315);
+        @include lightfont;
+        @include SlightRoundBorder;
+        font-size: 1em;
+        filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.288));
+        padding-block: 1em;
+        > option {
+          font-size: 0.95em;
+          @include lightfont;
+        }
+      }
+      > input {
+        border: 2px solid rgba(65, 64, 64, 0.315);
+        @include lightfont;
+        @include SlightRoundBorder;
+        font-size: 1em;
+        filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.288));
+        padding-block: 1em;
+      }
+      > button {
+        vertical-align: middle;
+        @include btn;
+      }
+    }
+  }
+  .listView {
+    padding: 5em;
+    .sort {
+      > h1 {
+        @include boldfont;
+        font-size: 2.5em;
+      }
+    }
+  }
+  .cardview {
+    border-top: 1px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    flex-direction: column;
+    margin-bottom: 1em;
+
+    > button {
+      @include btn;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content !important;
+      margin-top: 5em;
+      margin-bottom: 5em;
+    }
+
+    .doc {
+      width: 50em;
+      height: 10em;
+      background-color: white;
+      margin: auto;
+      @include SquareRoundBorder;
+      border: 0.5px solid rgba(0, 0, 0, 0.219);
+      display: flex;
+
+      > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        > div {
+          padding: 1em;
+          > button {
+            @include btn;
+          }
+          > div {
+            align-items: center;
+            justify-content: center;
+            > label {
+              @include boldfont;
+            }
+          }
+        }
+        > img {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          @include SquareRoundBorder;
+          width: 15em;
+          height: 100%;
+        }
+      }
+    }
+  }
+}

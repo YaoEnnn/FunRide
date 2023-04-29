@@ -1,8 +1,11 @@
 import styles from "./style.module.scss";
 import AnimatedOutlet from "../../AnimatedOutlet";
 import React, { Component } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+  const navigate = useNavigate();
+
   return (
     <AnimatedOutlet>
       <div className={styles.base}>
@@ -14,12 +17,22 @@ function Home() {
           <h1>--Popular Routes--</h1>
           <div className={styles.popular}>
             <div>
-              <div>Route #1</div>
-              <div>Route #2</div>
+              <div
+                onClick={() => {
+                  navigate("/Dis1-VT");
+                }}
+              >
+                Route Dis 1 - VT
+              </div>
+              <div>Route Dis 1 - BL</div>
+              <div>Route BT Dis - VT</div>
+              <div>Route BT Dis - BL</div>
             </div>
             <div>
-              <div>Route #3</div>
-              <div>Route #4</div>
+              <div>Route VT - Dis 1</div>
+              <div>Route VT - BT Dis</div>
+              <div>Route BL - Dis 1</div>
+              <div>Route BL - BT Dis</div>
             </div>
           </div>
           <h1>--Customers' Reviews</h1>

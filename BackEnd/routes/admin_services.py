@@ -214,7 +214,7 @@ def display_one_order(order_id):
     
 
 #delete order
-@app.route('/admin/delete/order/<order_id>', methods = ['DELETE'])
+@app.route('/admin/delete/order/<order_id>', methods = ['POST'])
 def delete_order(order_id):
     #check login
     if not check_login():
@@ -340,9 +340,10 @@ def display_one_private_order(order_id):
     })
 
 #delete private order
-@app.route('/admin/delete/private-order/<order_id>', methods = ['DELETE'])
+@app.route('/admin/delete/private-order/<order_id>', methods = ['POST'])
 def delete_private_order(order_id):
     #check login
+    print ('hello world')
     if not check_login():
         return jsonify({
             'status':'FAIL',
@@ -362,7 +363,7 @@ def delete_private_order(order_id):
 
         if data and "send_mail" in data:
             send_mail = data['send_mail']
-        #send email to user if need
+        # send email to user if need
         if send_mail == True:
             msg = Message("Your Private Order Has Been Cancelled",
             sender=app.config.get("MAIL_USERNAME"),

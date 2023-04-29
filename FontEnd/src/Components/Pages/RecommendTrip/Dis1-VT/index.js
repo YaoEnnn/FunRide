@@ -1,12 +1,12 @@
 import styles from "./style.module.scss";
-import AnimatedOutlet from "../../AnimatedOutlet";
+import AnimatedOutlet from "../../../AnimatedOutlet";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { error } from "../../lib/toast";
+import { error } from "../../../lib/toast";
 import { useNavigate } from "react-router-dom";
 import { useOutlet } from "react-router-dom";
 
-function SearchTrip() {
+function Dis1VT() {
   const [date, setDate] = useState();
   const [currentTrip, setCurrentTrip] = useState(null);
   const [value, setvalue] = useState(null);
@@ -19,17 +19,8 @@ function SearchTrip() {
     setCount(count + 20);
   };
 
-  const [showPopUp, setShowPopUp] = useState(false);
-
-  const handleClosePopUp = () => {
-    setShowPopUp(false);
-  };
-  const confbutton = (a) => {};
-
   const sortArray = [
-    "Not filterd",
-    "Departure from District 1, HCMC",
-    "Departure from Binh Tan District, HCMC",
+    "Not filtered",
     "Order by Limousine",
     "Order by Bus",
     "Order by Sleeper Bus",
@@ -42,41 +33,11 @@ function SearchTrip() {
   const handleSortChange = (event) => {
     setSort(event.target.value);
     console.log(event.target.value);
-    if (event.target.value === "Departure from District 1, HCMC") {
-      axios
-        .post("trip/order-by-user", {
-          start: "District 1, HCMC",
-          end: null,
-          departure_time: null,
-          price: null,
-          car_type: null,
-          departure_day: null,
-        })
-        .then((resp) => {
-          console.log(resp.data.msg);
-          setTrip(resp.data.msg);
-        });
-    }
-    if (event.target.value === "Departure from Binh Tan District, HCMC") {
-      axios
-        .post("trip/order-by-user", {
-          start: "BinhTan District, HCMC",
-          end: null,
-          departure_time: null,
-          price: null,
-          car_type: null,
-          departure_day: null,
-        })
-        .then((resp) => {
-          console.log(resp.data.msg);
-          setTrip(resp.data.msg);
-        });
-    }
     if (event.target.value === "Order by Limousine") {
       axios
         .post("trip/order-by-user", {
-          start: null,
-          end: null,
+          start: "District 1, HCMC",
+          end: "VungTau City",
           departure_time: null,
           price: null,
           car_type: "Limousine",
@@ -90,8 +51,8 @@ function SearchTrip() {
     if (event.target.value === "Order by Bus") {
       axios
         .post("trip/order-by-user", {
-          start: null,
-          end: null,
+          start: "District 1, HCMC",
+          end: "VungTau City",
           departure_time: null,
           price: null,
           car_type: "Bus",
@@ -105,8 +66,8 @@ function SearchTrip() {
     if (event.target.value === "Order by Sleeper Bus") {
       axios
         .post("trip/order-by-user", {
-          start: null,
-          end: null,
+          start: "District 1, HCMC",
+          end: "VungTau City",
           departure_time: null,
           price: null,
           car_type: "Sleeper-Bus",
@@ -120,8 +81,8 @@ function SearchTrip() {
     if (event.target.value === "Low - High Price") {
       axios
         .post("trip/order-by-user", {
-          start: null,
-          end: null,
+          start: "District 1, HCMC",
+          end: "VungTau City",
           departure_time: null,
           price: "Price Ascend",
           car_type: null,
@@ -135,8 +96,8 @@ function SearchTrip() {
     if (event.target.value === "High - Low Price") {
       axios
         .post("trip/order-by-user", {
-          start: null,
-          end: null,
+          start: "District 1, HCMC",
+          end: "VungTau City",
           departure_time: null,
           price: "Price Descend",
           car_type: null,
@@ -150,8 +111,8 @@ function SearchTrip() {
     if (event.target.value === "Earliest - Latest") {
       axios
         .post("trip/order-by-user", {
-          start: null,
-          end: null,
+          start: "District 1, HCMC",
+          end: "VungTau City",
           departure_time: "Earliest",
           price: null,
           car_type: null,
@@ -165,8 +126,8 @@ function SearchTrip() {
     if (event.target.value === "Latest - Earliest") {
       axios
         .post("trip/order-by-user", {
-          start: null,
-          end: null,
+          start: "District 1, HCMC",
+          end: "VungTau City",
           departure_time: "Latest",
           price: null,
           car_type: null,
@@ -177,24 +138,20 @@ function SearchTrip() {
           setTrip(resp.data.msg);
         });
     }
+    if (event.target.value === "Not filtered") {
+      axios.post("recommend-trip/Q1-VT").then((resp) => {
+        setTrip(resp.data.msg);
+        console.log(resp.data.msg);
+      });
+    }
   };
 
-  const endArray = [
-    "Unknown",
-    "District 1, HCMC",
-    "Binh Tan District, HCMC",
-    "Bao Loc City",
-    "VungTau City",
-  ];
   const carType = [];
 
-  const handleEndChange = (event) => {
-    setEnd(event.target.value);
-  };
-
   useEffect(() => {
-    axios.post("trip/display-all").then((resp) => {
+    axios.post("recommend-trip/Q1-VT").then((resp) => {
       setTrip(resp.data.msg);
+      console.log(resp.data.msg);
     });
   }, []);
 
@@ -208,43 +165,6 @@ function SearchTrip() {
   return (
     <AnimatedOutlet>
       <div className={styles.base}>
-        <div className={styles.searchBar}>
-          <h1>--Search Bar--</h1>
-          <section className={styles.mainInput}>
-            <select
-              value={end}
-              onChange={handleEndChange}
-              defaultValue={endArray[4]}
-            >
-              {endArray.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-            <input
-              type="date"
-              onChange={(e) => setDate(e.target.value)}
-            ></input>
-            <button
-              onClick={() => {
-                if (end === "Unknown" || end === "") {
-                  console.log("pleple");
-                  error("Please input your desired destination");
-                  return;
-                }
-                console.log(date);
-                if (date === undefined) {
-                  error("Please input your desired date");
-                  return;
-                } else {
-                }
-              }}
-            >
-              Confirm
-            </button>
-          </section>
-        </div>
         <div className={styles.listView}>
           <section className={styles.sort}>
             <h1>--Sorting--</h1>
@@ -319,4 +239,4 @@ function SearchTrip() {
     </AnimatedOutlet>
   );
 }
-export default SearchTrip;
+export default Dis1VT;

@@ -20,7 +20,9 @@ import AddAdmin from "./Components/Pages/Admin/add";
 import AddDiscount from "./Components/Pages/discount/add";
 import PrivateOrder from "./Components/Pages/PrivateOrder";
 import TripOrder from "./Components/Pages/Trip Order";
+import Dis1VT from "./Components/Pages/RecommendTrip/Dis1-VT";
 import SeatPicker from "./Components/SeatPicker";
+import Booking from "./Components/Pages/searchTrip/Booking";
 
 import { AnimatePresence } from "framer-motion";
 import axios from "axios";
@@ -89,7 +91,19 @@ function App() {
                 <SearchTrip></SearchTrip>
               </DefaultLayout>
             }
-          ></Route>
+          >
+            <Route path=":id" element={<Booking></Booking>}></Route>
+          </Route>
+          <Route
+            path="/Dis1-VT"
+            element={
+              <DefaultLayout>
+                <Dis1VT></Dis1VT>
+              </DefaultLayout>
+            }
+          >
+            <Route path=":id" element={<Booking></Booking>}></Route>
+          </Route>
           <Route
             path="/privateTrip"
             element={

@@ -5,9 +5,11 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import PopUp from "./PopUp/popup";
 import { success, error } from "../../../lib/toast";
+import { useNavigate } from "react-router-dom";
 
 function OrderID() {
   const id = useParams();
+  const navigate = useNavigate();
   const [TripDetail, setTripDetail] = useState([]);
   const [showPopUp, setShowPopUp] = useState(false);
   const [isChecked, setchecked] = useState(false);
@@ -22,13 +24,16 @@ function OrderID() {
   };
   const confbutton = () => {
     console.log(isChecked);
+    console.log(id);
+    console.log(`admin/delete/private-order/${id.id}`);
     axios
-      .post(`/admin/delete/private-order${id.id}`, {
-        send_email: isChecked,
+      .post(`admin/delete/private-order/${id.id}`, {
+        send_mail: isChecked,
       })
       .then((resp) => {
         console.log(resp.data);
         success("Trip deleted successfully");
+        navigate("../");
       });
   };
 
