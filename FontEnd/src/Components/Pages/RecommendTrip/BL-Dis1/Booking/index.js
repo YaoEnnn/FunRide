@@ -246,9 +246,15 @@ function Booking() {
                   phone: phoneRef.current.value,
                   email: emailRef.current.value,
                   address: addRef.current.value,
+                  offer: discountRef.current.value,
                   seat: seat,
                 })
                 .then((resp) => {
+                  if (resp.data.status === "FAIL") {
+                    error(resp.data.err);
+                    return;
+                  }
+                  success("sucessfully book");
                   console.log(resp.data.msg);
                 });
             }}
