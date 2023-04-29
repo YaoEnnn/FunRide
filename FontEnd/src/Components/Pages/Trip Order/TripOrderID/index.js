@@ -41,9 +41,9 @@ function TripOrderID() {
     axios.post(`admin/get/order/${id.id}`).then((resp) => {
       setTripDetail(resp.data.msg);
       console.log(resp.data.msg);
-      console.log(TripDetail.seat);
+      console.log(resp.data.msg.seat);
       setRenderList(
-        TripDetail.seat.map((item, id) => <label key={id}>{item},</label>)
+        resp.data.msg.seat.map((item, id) => <label key={id}>{item},</label>)
       );
     });
   }, []);
