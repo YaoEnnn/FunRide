@@ -1,7 +1,45 @@
 @import "../../globalStyle.scss";
 @import "../../globalMixins.scss";
 .base {
+  padding: 3em;
+  > h1 {
+    @include boldfont;
+  }
+  > .about {
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+    margin-bottom: 5em;
+
+    > div:nth-child(1) {
+      flex: 1;
+      display: flex;
+      gap: 1em;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      @include lightfont;
+      > h1 {
+        margin: auto;
+      }
+    }
+    > div:nth-child(2) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      flex: 1;
+      gap: 1em;
+      @include lightfont;
+      > h1 {
+        margin: auto;
+      }
+    }
+  }
   .contactpage {
+    margin-top: 3em;
     max-width: 800px;
     margin: 0 auto;
     padding: 40px;

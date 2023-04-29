@@ -29,8 +29,6 @@ function SearchBarTrip() {
 
   const sortArray = [
     "Not filterd",
-    "Departure from District 1, HCMC",
-    "Departure from Binh Tan District, HCMC",
     "Order by Limousine",
     "Order by Bus",
     "Order by Sleeper Bus",
@@ -254,6 +252,10 @@ function SearchBarTrip() {
                       departure_day: date,
                     })
                     .then((resp) => {
+                      if (resp.data.status === "FAIL") {
+                        error(resp.data.err);
+                        return;
+                      }
                       setTrip(resp.data.msg);
                     });
                 }
