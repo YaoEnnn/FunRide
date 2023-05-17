@@ -15,6 +15,7 @@ function Settings() {
   const phoneRef = createRef();
   const genderArray = ["Unknown", "Male", "Female"];
   const [gender, setGender] = useState("");
+  const [defaultGender, setDefaultGender] = useState("");
 
   //For the Change password function//
   const oldPassRef = createRef();
@@ -61,6 +62,10 @@ function Settings() {
       const temp = resp.data.msg;
       console.log(temp);
       setProfile(temp);
+      setGender(temp.gender);
+      setDefaultGender(temp.gender);
+      console.log(gender);
+      console.log(defaultGender);
     });
   }, []);
 
@@ -105,7 +110,7 @@ function Settings() {
             {genderArray.map((option) => (
               <option
                 key={option}
-                value={option}
+                value={gender}
                 defaultValue={gender}
                 onChange={handleGenderChange}
               >

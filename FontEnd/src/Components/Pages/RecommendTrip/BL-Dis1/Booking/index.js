@@ -239,24 +239,45 @@ function Booking() {
                 error("Please choose your gender");
                 return;
               }
-              axios
-                .post(`trip/${id.id}/order`, {
-                  name: nameRef.current.value,
-                  gender: gender,
-                  phone: phoneRef.current.value,
-                  email: emailRef.current.value,
-                  address: addRef.current.value,
-                  offer: discountRef.current.value,
-                  seat: seat,
-                })
-                .then((resp) => {
-                  if (resp.data.status === "FAIL") {
-                    error(resp.data.err);
+              if (discountRef.current.value === "") {
+                axios
+                  .post(`trip/${id.id}/order`, {
+                    name: nameRef.current.value,
+                    gender: gender,
+                    phone: phoneRef.current.value,
+                    email: emailRef.current.value,
+                    address: addRef.current.value,
+                    seat: seat,
+                  })
+                  .then((resp) => {
+                    if (resp.data.status === "FAIL") {
+                      error(resp.data.err);
+                      return;
+                    }
+                    success("sucessfully book");
+                    console.log(resp.data.msg);
                     return;
-                  }
-                  success("sucessfully book");
-                  console.log(resp.data.msg);
-                });
+                  });
+              } else {
+                axios
+                  .post(`trip/${id.id}/order`, {
+                    name: nameRef.current.value,
+                    gender: gender,
+                    phone: phoneRef.current.value,
+                    email: emailRef.current.value,
+                    address: addRef.current.value,
+                    offer: discountRef.current.value,
+                    seat: seat,
+                  })
+                  .then((resp) => {
+                    if (resp.data.status === "FAIL") {
+                      error(resp.data.err);
+                      return;
+                    }
+                    success("sucessfully book");
+                    console.log(resp.data.msg);
+                  });
+              }
             }}
           >
             Book Ticket

@@ -35,7 +35,7 @@ const Admin = () => {
       console.log(resp.data.msg);
       setShowAdmin(resp.data.msg);
     });
-  }, []);
+  }, [count]);
 
   const outlet = useOutlet();
   if (outlet) {

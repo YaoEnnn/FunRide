@@ -80,7 +80,7 @@ function Discount() {
                 return (
                   <div key={i}>
                     <label>{e.code}</label>
-                    <label>{e.discount}</label>
+                    <label>{e.discount}%</label>
                     <label>{e.available}</label>
                     <label>{e.created_on}</label>
                     {isBigRole.isManager === true && (
