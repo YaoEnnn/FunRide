@@ -106,16 +106,6 @@ function SeatPicker({ section1 = [], section2 = [], onChange = () => {} }) {
           )}
         </div>
       </div>
-
-      {/* <div>
-        <pre>[</pre>
-
-        {selected.map((e, i) => {
-          return <pre key={i}> {JSON.stringify(e)},</pre>;
-        })}
-
-        <pre>]</pre>
-      </div> */}
     </>
   );
 }
