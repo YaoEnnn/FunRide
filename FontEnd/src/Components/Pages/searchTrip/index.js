@@ -185,6 +185,12 @@ function SearchTrip() {
           setTrip(resp.data.msg);
         });
     }
+    if (event.target.value === "Not filtered") {
+      axios.post("trip/display-all").then((resp) => {
+        setTrip(resp.data.msg);
+        console.log(resp.data.msg);
+      });
+    }
   };
 
   const endArray = [

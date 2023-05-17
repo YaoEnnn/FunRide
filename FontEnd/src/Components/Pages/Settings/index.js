@@ -105,12 +105,12 @@ function Settings() {
           <select
             value={gender}
             onChange={handleGenderChange}
-            defaultValue={profile.gender}
+            defaultValue={defaultGender}
           >
             {genderArray.map((option) => (
               <option
                 key={option}
-                value={gender}
+                value={option}
                 defaultValue={gender}
                 onChange={handleGenderChange}
               >

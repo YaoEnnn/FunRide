@@ -3,7 +3,7 @@ import AnimatedOutlet from "../../../AnimatedOutlet";
 import React, { Component, useEffect } from "react";
 import CustomInput from "../../../CustomInput";
 import { createRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import SeatPicker from "../../../SeatPicker";
 import { error, success } from "../../../lib/toast";
@@ -17,6 +17,7 @@ function Booking() {
   const discountRef = createRef();
   const genderArray = ["Unknown", "Male", "Female"];
   const [gender, setGender] = useState("");
+  const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -255,6 +256,7 @@ function Booking() {
                       return;
                     }
                     success("sucessfully book");
+                    navigate("/");
                     console.log(resp.data.msg);
                     return;
                   });
@@ -275,6 +277,7 @@ function Booking() {
                       return;
                     }
                     success("sucessfully book");
+                    navigate("/");
                     console.log(resp.data.msg);
                   });
               }

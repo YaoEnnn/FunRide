@@ -138,12 +138,6 @@ function BLBtDis() {
           setTrip(resp.data.msg);
         });
     }
-    if (event.target.value === "Not filtered") {
-      axios.post("recommend-trip/BL-BT").then((resp) => {
-        setTrip(resp.data.msg);
-        console.log(resp.data.msg);
-      });
-    }
   };
 
   const carType = [];
