@@ -17,6 +17,6 @@ if __name__ == "__main__":
             db.session.execute(text("PRAGMA foreign_keys = ON"))
             print("Database Created")
 
-    schedule.every().day.at("10:30").do(generate_default_trips)
+        schedule.every().day.at("10:30").do(generate_default_trips)
 
-    app.run(debug=True, port=5000)
+        app.run(debug=True, port=5000)

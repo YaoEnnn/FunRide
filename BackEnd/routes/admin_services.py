@@ -499,46 +499,6 @@ def search_private_order():
             'status':'FAIL',
             'err':'No Private Order Found'
         })
-
-#Login Route for Admin and Manager
-@app.route('/admin/login', methods = ['POST'])
-def login_func():
-    data = request.json
-    if not data or not 'user_name' in data or not 'password' in data:
-        return jsonify({
-            'status':'FAIL',
-            'err':'Missing Parameters'
-        })
-    
-    user_name = data['user_name'].strip()
-    password = data['password'].strip()
-
-    #check user name
-    user = User.query.filter(User.user_name == user_name).first()
-
-    if not user:
-        return jsonify({
-            'status':'FAIL',
-            'err':'Unvalid User-Name'
-        })
-    
-    #checf password
-    if not check_password_hash(user.password, password):
-        return jsonify({
-            'status':'FAIL',
-            'err':'Unvalid Password'
-        })
-    #check password hash = True
-    else:
-        session = Session(user.id)
-        db.session.add(session)
-        db.session.commit()
-
-        #return token for logging in
-        return jsonify({
-            'status':'OK',
-            'msg':session.token
-        })
     
 @app.route('/admin/logout', methods = ['POST'])
 def logout():
@@ -719,7 +679,47 @@ def change_password():
         'msg':'Password Changed'
     })
 
-def     check_login():
+#Login Route for Admin and Manager
+@app.route('/admin/login', methods = ['POST'])
+def login_func():
+    data = request.json
+    if not data or not 'user_name' in data or not 'password' in data:
+        return jsonify({
+            'status':'FAIL',
+            'err':'Missing Parameters'
+        })
+    
+    user_name = data['user_name'].strip()
+    password = data['password'].strip()
+
+    #check user name
+    user = User.query.filter(User.user_name == user_name).first()
+
+    if not user:
+        return jsonify({
+            'status':'FAIL',
+            'err':'Unvalid User-Name'
+        })
+    
+    #check password
+    if not check_password_hash(user.password, password):
+        return jsonify({
+            'status':'FAIL',
+            'err':'Unvalid Password'
+        })
+    #check password hash = True
+    else:
+        session = Session(user.id)
+        db.session.add(session)
+        db.session.commit()
+
+        #return token for logging in
+        return jsonify({
+            'status':'OK',
+            'msg':session.token
+        })
+
+def check_login():
     #get token from FrontEnd
     token = request.headers.get("Authorization")
 
@@ -743,4 +743,4 @@ def     check_login():
         
         return False
    
-    return True;
+    return True

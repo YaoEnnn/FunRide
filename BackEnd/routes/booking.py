@@ -46,7 +46,7 @@ def booking_seat(trip_id):
         
         else:
             #check if user enter discount code?
-            if 'offer' in data and 'offer' != '':
+            if 'offer' in data:
                 offer_code = data['offer']
             
                 #validate offer code
