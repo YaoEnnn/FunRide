@@ -60,7 +60,7 @@ function PrivateOrder() {
               </div>
             </div>
             <div>
-              {showPrivate.map((e, i) => {
+              {showPrivate?.map((e, i) => {
                 return (
                   <div
                     key={i}

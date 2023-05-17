@@ -65,7 +65,7 @@ const Admin = () => {
               </div>
             </div>
             <div>
-              {showAdmin.map((e, i) => {
+              {showAdmin?.map((e, i) => {
                 return (
                   <div key={i}>
                     <label>{e.name}</label>

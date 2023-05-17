@@ -60,7 +60,7 @@ function TripOrder() {
               </div>
             </div>
             <div>
-              {showTrip.map((e, i) => {
+              {showTrip?.map((e, i) => {
                 return (
                   <div
                     key={i}
