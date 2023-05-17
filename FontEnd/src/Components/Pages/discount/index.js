@@ -76,7 +76,7 @@ function Discount() {
               </div>
             </div>
             <div>
-              {showDiscount.map((e, i) => {
+              {showDiscount?.map((e, i) => {
                 return (
                   <div key={i}>
                     <label>{e.code}</label>
