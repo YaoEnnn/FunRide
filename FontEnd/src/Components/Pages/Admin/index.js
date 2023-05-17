@@ -46,7 +46,7 @@ const Admin = () => {
     <AnimatedOutlet>
       <div className={styles.base}>
         <div className={styles.header}>
-          <h1>--Display Admin--</h1>
+          <h1>Display Admin</h1>
           <button
             onClick={() => {
               navigate("add");

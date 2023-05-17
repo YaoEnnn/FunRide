@@ -55,7 +55,7 @@ function Discount() {
     <AnimatedOutlet>
       <div className={styles.base}>
         <div className={styles.header}>
-          <h1>--Discount--</h1>
+          <h1>Discount</h1>
           <button
             onClick={() => {
               navigate("add");

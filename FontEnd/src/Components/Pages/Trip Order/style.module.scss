@@ -5,18 +5,17 @@
   padding: 3em;
   .header {
     display: flex;
+    gap: 2em;
+    vertical-align: middle;
+    align-items: center;
     > h1 {
       @include boldfont;
       margin-left: 30vh;
     }
-    > input {
-      position: absolute;
-      right: 0;
-      margin-right: 30vh;
-    }
+
     > button {
       @include btn;
-      margin-left: 5em;
+      margin-left: 3em;
       justify-content: center;
       align-items: baseline;
     }

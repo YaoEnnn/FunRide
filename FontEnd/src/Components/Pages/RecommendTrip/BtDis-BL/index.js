@@ -167,7 +167,7 @@ function BtDisBL() {
       <div className={styles.base}>
         <div className={styles.listView}>
           <section className={styles.sort}>
-            <h1>--Sorting--</h1>
+            <h1>Sorting</h1>
             <select
               value={sort}
               onChange={handleSortChange}

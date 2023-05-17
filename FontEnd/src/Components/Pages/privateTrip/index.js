@@ -4,6 +4,7 @@ import React, { Component, createRef, useState } from "react";
 import CustomInput from "../../CustomInput";
 import { error, success } from "../../../Components/lib/toast";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function PrivateTrip() {
   const [date, setDate] = useState();
@@ -40,6 +41,7 @@ function PrivateTrip() {
   const [time, setTime] = useState("");
   const [departLocation, setDepartLocation] = useState("");
   const [destination, setDestination] = useState("");
+  const navigate = useNavigate();
 
   const handleGenderChange = (event) => {
     setGender(event.target.value);
@@ -245,6 +247,7 @@ function PrivateTrip() {
                     return;
                   }
                   success("Private trip successfully added");
+                  navigate("/");
                 });
             }}
           >

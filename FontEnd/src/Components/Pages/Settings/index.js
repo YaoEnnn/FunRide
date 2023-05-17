@@ -72,7 +72,7 @@ function Settings() {
   return (
     <div className={styles.base}>
       <div className={styles.header}>
-        <h1>--Profile--</h1>
+        <h1>Profile</h1>
       </div>
       <div className={styles.profile}>
         <div>
@@ -148,7 +148,7 @@ function Settings() {
         </div>
       </div>
       <div className={styles.passwordChange}>
-        <h1>--Customize your Password--</h1>
+        <h1>Customize your Password</h1>
         <div>
           <CustomInput
             custom_ref={oldPassRef}
@@ -242,7 +242,7 @@ function Settings() {
         </div>
       </div>
       <div className={styles.Logout}>
-        <h1>--Log Out Session--</h1>
+        <h1>Log Out Session</h1>
         <div>
           <button onClick={handleButtonClick}>Log Out</button>
           {popup && (

@@ -235,7 +235,7 @@ function SearchTrip() {
             </button>
           )}
           {showPopUp && <Popup handleClose={handleClosePopUp}></Popup>}
-          <h1>--Display all Trips--</h1>
+          <h1>Display all Trips</h1>
           <section className={styles.mainInput}>
             <button
               onClick={() => {
@@ -248,7 +248,7 @@ function SearchTrip() {
         </div>
         <div className={styles.listView}>
           <section className={styles.sort}>
-            <h1>--Sorting--</h1>
+            <h1>Sorting</h1>
             <select
               value={sort}
               onChange={handleSortChange}

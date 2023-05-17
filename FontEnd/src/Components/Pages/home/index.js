@@ -15,7 +15,7 @@ function Home() {
           <p>Welcome to FunRide</p>
         </div>
         <div>
-          <h1>--Popular Routes--</h1>
+          <h1>Popular Routes</h1>
           <div className={styles.popular}>
             <div>
               <div
@@ -78,7 +78,7 @@ function Home() {
               </div>
             </div>
           </div>
-          <h1>--Customers' Reviews</h1>
+          <h1>Customers' Reviews</h1>
           <div className={styles.reviews}>
             <div>
               <img src="https://mashummollah.com/wp-content/uploads/2020/07/Elon-Musk.jpg"></img>

@@ -26,6 +26,8 @@
     > h1 {
       @include boldfont;
       font-size: 2.5em;
+      margin-left: 1em;
+      margin-top: 1em;
     }
     > .popular {
       display: flex;

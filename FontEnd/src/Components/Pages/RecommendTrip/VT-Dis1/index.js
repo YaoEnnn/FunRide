@@ -186,7 +186,7 @@ function VTDis1() {
         {showPopUp && <Popup handleClose={handleClosePopUp}></Popup>}
         <div className={styles.listView}>
           <section className={styles.sort}>
-            <h1>--Sorting--</h1>
+            <h1>Sorting</h1>
             <select
               value={sort}
               onChange={handleSortChange}

@@ -25,7 +25,7 @@ function PrivateOrder() {
     <AnimatedOutlet>
       <div className={styles.base}>
         <div className={styles.header}>
-          <h1>--Order of Private Trip--</h1>
+          <h1>Order of Private Trip </h1>
           <CustomInput
             className={styles.Custominput}
             type="text"
