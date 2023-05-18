@@ -28,6 +28,9 @@ def search_trip():
             'err':'Missing Parameter'
         })
     
+    print(today)
+    print(departure_day)
+    
     #check if user enter unvalid departure day
     if datetime.strptime(departure_day, '%Y-%m-%d').date() < today: #convert String type into Datetime.Date() type
         return jsonify({
@@ -35,10 +38,10 @@ def search_trip():
             'err':'Unvalid Departure Day'
         })
     
-    if departure_day == today:
-        #Filter trip base on 'end' & 'departure_day' (Just only trips later than current time 1 hour are available)
+    if departure_day == str(today):
+        # Filter trip base on 'end' & 'departure_day' (Just only trips later than current time 1 hour are available)
         trips = Trip.query.filter(Trip.departure_day == departure_day, Trip.end == end,
-                                    Trip.departure_time >= new_time).all()
+                                Trip.departure_time >= new_time).all()
     else:
         trips = Trip.query.filter(Trip.departure_day == departure_day, Trip.end == end).all()
 
